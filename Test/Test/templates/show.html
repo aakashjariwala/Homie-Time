@@ -1,0 +1,48 @@
+{% load static tailwind_tags %}	{% tailwind_css %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/input.css' %}">
+    <title>Test Record</title>
+
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>firstname</th>
+                <th>lastname</th>
+                <th>username</th>
+                <th>email</th>
+                <th>passwordHash</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for Tests in Test %}
+            <tr>
+                <td>{{Tests.firstname }}</td>
+                <td>{{Tests.lastname}}</td>
+                <td>{{Tests.username}}</td>
+                <td>{{Tests.email}}</td>
+                <td>{{Tests.passwordHash}}</td>
+                <td>
+                    <a href="/edit/{{ Test.id }}">Edit</a>
+                    <a href="/delete/{{Test.id}}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <button><a style="color:white;" href="/userfunc">Add New Record</a></button>
+</body>
+
+</html>

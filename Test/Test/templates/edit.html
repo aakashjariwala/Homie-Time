@@ -1,0 +1,62 @@
+{% load static tailwind_tags %}	{% tailwind_css %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/input.css' %}">
+    <title>Document</title>
+  
+</head>
+
+<body>
+    <form method="POST" action="/update/{{employee.id}}">
+        {% csrf_token %}
+        <div>
+            <br>
+            <p>
+                <h3>Update Details</h3>
+            </p>
+        </div>
+        <div>
+            <p>firstname:</p>
+            <div>
+                <input type="text" name="firstname" value="{{Test.firstname}}}" />
+            </div>
+        </div>
+        <div>
+            <p>lastname:</p>
+            <div>
+                <input type="text" name="lastname" value="{{Test.lastname}}" />
+            </div>
+        </div>
+        <div>
+            <p>username:</p>
+            <div>
+                <input type="text" name="username" value="{{Test.username}}" />
+            </div>
+        </div>
+        <div>
+            <p>email:</p>
+            <div>
+                <input type="text" name="email" value="{{Test.email}}" />
+            </div>
+        </div>
+        <div>
+            <p>passwordHash:</p>
+            <div>
+                <input type="text" name="password" value="{{Test.passwordHash}}" />
+            </div>
+        </div>
+        <div>
+            <br>
+            <button type="submit">Update</button>
+        </div>
+    </form>
+</body>
+
+</html>
