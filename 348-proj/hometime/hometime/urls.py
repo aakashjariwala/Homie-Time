@@ -1,4 +1,4 @@
-"""Test URL Configuration
+"""hometime URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -14,26 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
 from django.urls import include, path
-from requests import delete
 from . import views
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    path('userfunc/', views.userfunc),
-    path('show', views.show),
-    path('edit/<int:id>', views.edit),
-    path('update/<int:id>',views.update),
-    path('delete/<int:id>', views.destroy),
-
-
-    #path('index/', views.index, name="index"),
-    path('login/', views.login, name="login"),
-    path('registration/', views.registration, name="registration"),
-
-
+    path('index/', views.index, name="index"),
+    path('home/', views.home, name="home"),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
