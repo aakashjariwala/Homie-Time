@@ -1,0 +1,112 @@
+{% load static tailwind_tags %} {% tailwind_css %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>login</title>
+	</head>
+	<style>
+
+		.box{
+            position: absolute;
+			display: flex;
+			align-items: center;
+			/*margin: 400px auto;*/
+			justify-content: center;
+			background-color: white;
+			border-radius: 85px;
+			height: 300px;
+			width: 500px;
+            right: 650px;
+            top: 400px;
+		}
+        .x-icon{
+            display: flex;
+            position: absolute;
+            height: 300px;
+            top: 60px;
+            left: 550px
+
+        }
+		.text{
+			display: block;
+			position: relative;
+            height: 270px;
+            width: 300px;
+		}
+
+        .user{
+            position: relative;
+            /* outline: 2px solid green; */
+            width: 100%;
+
+        } 
+		.username{
+            position: relative;
+            margin-top: 10px;
+			margin-bottom: 30px;
+            /* outline: 2px solid green; */
+            width: 100%;
+		}
+
+		#passwordID{
+            position: relative;
+			margin-bottom: 40px;
+            /* outline: 2px solid blue; */
+            width: 100%;
+		}
+        .user{
+            height: 60px;
+        }
+        .pass{
+            height: 60px;
+        }
+
+        .btn{
+            display: flex;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            /* outline: 2px solid pink; */
+            
+        }
+        #btnID{
+            position: absolute;
+            width: 40%;
+        }
+        .logo{
+            display: relative;
+        }
+        
+
+	</style>
+	<body class="main" style="background: linear-gradient(to bottom right,#D0E6E6, #DAE1F5);">
+
+        <!-- Logo Field -->
+        <div class="x-icon">
+            <img src="{% static '/icons/logo.png' %}" class="image"></img>
+        </div>
+
+        <!-- Username and password container -->
+        <div class="box">
+			<div class="text">
+
+                <!-- Username Field -->
+                <div class="username">
+                    <label class="user" for="usernameID">Username</label>
+                    <input style="background-color: #F0F0F0;" type="text" class="user" id="usernameID" name="" placeholder="Enter your username">    
+                </div>
+
+                <!-- Password Field -->
+                <div class="password">
+                    <label class="passfield" for="passwordID">Password</label>
+                    <input style="background-color: #F0F0F0;" type="text" class="pass" id="passwordID" placeholder="Enter your password">
+                </div>
+
+               <!-- Button Field -->
+                <div class="btn">
+				    <button style="background-color: #bfd8e3; color: #574326;" onclick="location.href = '../profile/'"class="hover:bg-violet-600 text-white font-bold py-2 px-4 rounded-full" id="btnID"> login</button>
+                </div>
+			</div>
+		</div>
+	</body>
+</html>

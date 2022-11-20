@@ -1,0 +1,154 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>Registration</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		{% tailwind_css %}
+	</head>
+	<style>
+		.nav{
+			display: flex;
+			position: relative;
+			justify-content: center;
+			padding-top: 5px;
+			height: 50px;
+			left: 220px;
+			width: 10%;
+			margin-top: 20px;
+			border-radius: 15px;
+			color: gray;
+			font-size: 25px;
+			background-color: white;
+		}
+
+		.box{
+			position: relative;
+			height: 1000px;
+			margin-top: 20px;
+			background-color: white;
+			border-top-left-radius: 100px;
+			border-top-right-radius: 100px;
+			overflow: hidden;
+		}
+
+		.form{
+			display: block;
+			position: relative;
+			/*outline: 2px solid red; */
+			height: 650px;
+			width: 40%;
+			left: 350px;
+			margin-top: 40px;
+			padding-top: 50px;
+		}
+
+		/*
+		.user{
+			outline: 2px solid pink;
+		} */
+		label {
+			vertical-align: baseline;
+		}
+		
+		.Field{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 30px;
+		}
+
+		.profile-image{
+			position: relative;
+			background-color: #F0F0F0;
+			/* outline: 2px solid blue; */
+			margin:  -600px auto;
+			margin-right: 140px;
+			width: 500px;
+			height: 40%;
+			border-radius: 50%;
+		}
+		
+		.btn-class{
+			position: relative;
+			width: 70px;
+			top: 60px;
+			left: 1000px;
+		}
+
+		#saveID{
+			position: absolute;
+			width: 200px;
+			height: 50px;
+		}
+
+		.x-icon{
+			display: flex;
+			position: relative;
+			bottom: 640px;
+			width: 50px;
+			left: 50px;
+		}
+
+		/*
+		.display{
+			display: block;
+			outline: 4px solid blue;
+		}*/
+
+
+	</style>
+	<body class="main" style="background: linear-gradient(to bottom right,#D0E6E6, #DAE1F5);">
+		<div class="nav">
+			Profile
+		</div>
+		<div class="box">
+			<div class="form">
+				<div class="display">
+
+					<!-- Form Fields -->
+					<div class="Field">
+						<label class="user" for="firstid">Name:</label>
+						<input style="background-color: #F0F0F0;" id="firstid" placeholder="Enter First Name" type="text">
+						<input style="background-color: #F0F0F0;" id="lastnameid" placeholder="Enter Last Name" type="text">
+					</div>
+	
+					<div class="Field">
+						<label class="user" for="">User ID:</label>
+						<input style="width: 535px;  background-color: #F0F0F0;" type="text" placeholder="Enter User ID">
+					</div>
+					<div class="Field">
+						<label class="user" for="">Email: </label>
+						<input style="width: 535px; background-color: #F0F0F0;" type="text" placeholder="Enter Email">
+					</div>
+					<div class="Field">
+						<label class="user" for="">Bio: </label>
+						<textarea style="resize: none; background-color: #F0F0F0;" name="" id="" cols="59" rows="4" placeholder="About me..."></textarea>
+						<!-- <input style="width: 535px; height: 100px;" type="text"> -->
+					</div>
+					<div class="Field">
+						<label class="user" for="">image: </label>
+						<input style="width: 535px; background-color: #F0F0F0;" type="text" placeholder="Maybe image path?">
+					</div>
+				</div>
+				
+			</div>
+			<div class="btn-class">
+				<button onclick="location.href = '../login/'"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" id="saveID" style="background-color: #bfd8e3; color: #574326;"> Save</button>
+			</div>
+			<div class="x-icon">
+				<button onclick="location.href = '../login/'">
+					<img src="{% static '/icons/x_out.png' %}" class="image"></img>
+				</button>
+			</div>
+			<div class="profile-image">
+
+			</div>
+
+		</div>
+
+		</div>
+	</body>
+</html>
