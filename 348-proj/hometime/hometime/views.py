@@ -5,3 +5,6 @@ def index(request):
 
 def home(request):
     return render(request, 'home.html')
+
+def viewcal(request):
+    return render(request, 'viewcal.html')
