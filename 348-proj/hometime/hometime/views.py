@@ -15,3 +15,8 @@ def editEvent(request):
 def createEvent(request):
     return render(request, 'createEvent.html')
     
+def home(request):
+    return render(request, 'home.html')
+
+def viewcal(request):
+    return render(request, 'viewcal.html')

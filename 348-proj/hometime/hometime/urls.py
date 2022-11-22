@@ -27,5 +27,7 @@ urlpatterns = [
     path('editEvent/', views.editEvent, name='editEvent'),
     path('createEvent/', views.createEvent, name='createEvent'),
 
+    path('home/', views.home, name="home"),
+    path('view/', views.viewcal, name="view"),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
