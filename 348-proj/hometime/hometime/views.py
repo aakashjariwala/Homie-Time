@@ -20,3 +20,9 @@ def home(request):
 
 def viewcal(request):
     return render(request, 'viewcal.html')
+
+def homielist(request):
+    return render(request, 'homielist.html')
+
+def findtime(request):
+    return render(request, 'findtime.html')

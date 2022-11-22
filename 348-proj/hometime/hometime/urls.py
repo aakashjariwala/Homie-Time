@@ -29,5 +29,9 @@ urlpatterns = [
 
     path('home/', views.home, name="home"),
     path('view/', views.viewcal, name="view"),
+
+    path('homielist/', views.homielist, name='homielist'),
+    path('findtime/', views.findtime, name='findtime'),
+    
     path("__reload__/", include("django_browser_reload.urls")),
 ]
