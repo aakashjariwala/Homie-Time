@@ -1,4 +1,4 @@
-{% load tailwind_tags %} {% tailwind_css %}
+{% load static tailwind_tags %} {% tailwind_css %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -96,12 +96,12 @@
 
 <body>
     <div id="topbar">
-    <img src="x_out.png" />
+    <img src="{% static '/icons/x_out.png' %}" />
        <h1>Edit Event</h1> 
     </div>
     <div id="container">
         <div class="row">
-            <img src="x_out.png" />
+            <img src="{% static '/icons/x_out.png' %}" />
             <div class="column">
                 <label for="Title">Title:</label>
                 <input type="text" id="Title" name="Name" placeholder="Boss' Birthday Party">

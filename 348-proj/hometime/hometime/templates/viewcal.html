@@ -1,5 +1,4 @@
-
-{% load tailwind_tags %} {% tailwind_css %}
+{% load static tailwind_tags %} {% tailwind_css %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,7 +130,9 @@
         <div4 class="flex-container4">
             <div3 class="flex-container">
                 <divEvent>
-                    <button class="button button1" onclick="location.href = '../editEvent/'"><img src="../images/edit_button.png" alt="edit"/></button>
+                    <button class="button button1" onclick="location.href = '../editEvent/'">
+                        <img src="{% static '/icons/edit_button.png' %}" alt="edit"/>
+                    </button>
                     <p>event name</p>
                 </div>
             </div3>
