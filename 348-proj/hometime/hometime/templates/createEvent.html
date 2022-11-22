@@ -1,0 +1,145 @@
+{% load tailwind_tags %} {% tailwind_css %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .column {
+        float: left;
+        width: 50%;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    label {
+        display: inline-block;
+        width: 200px;
+        margin-right: 30px;
+        text-align: right;
+        vertical-align: top;
+    }
+
+    input[type=datetime-local],
+    input[type=text],
+    input[type=textarea]
+     {
+        background-color: #F0F0F0;
+        border: 0;
+        width: 250px;
+    }
+
+
+    textarea
+     {
+        background-color: #F0F0F0;
+        border: 0;
+        width: 250px;
+        height: 100px;
+        padding-top: 0;
+    }
+
+
+    #rcorners1 {
+        border-radius: 25px;
+        padding: 20px;
+        width: 200px;
+        height: 150px;
+    }
+
+
+    .button {
+        margin: 0;
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin-top:100px;
+        background-color: #DAE1F5;
+        border-radius: 20px;
+        padding: 5px 30px;
+        color: gray;
+    }
+
+    #container {
+        border-radius: 50px;
+        background: white;
+        padding: 20px;
+        height: 100%;
+        margin-top: 20px;
+
+    }
+
+    h1 {
+        font-size: 30px;
+        margin-left: 75px;
+        color: gray;
+        padding-top:15px;
+    }
+
+
+
+    body {
+        background-image: linear-gradient(to right, #D0E6E6, #DAE1F5);
+    }
+</style>
+
+<body>
+    <div id="topbar">
+    <img src="x_out.png" />
+       <h1>Create Event</h1> 
+    </div>
+    <div id="container">
+        <div class="row">
+            <img src="x_out.png" />
+            <div class="column">
+                <label for="Title">Title:</label>
+                <input type="text" id="Title" name="Name" placeholder="Boss' Birthday Party">
+                <br><br>
+                <label for="Type">Type:</label>
+                <input type="text" id="Type" name="Type" placeholder="Work">
+                <br><br>
+                <label for="Time">Time:</label>
+                <input type="datetime-local" id="Time" name="Time">
+                <br><br>
+                <label for="Desc">Description:</label>
+                <textarea name="text" rows="14" cols="10" wrap="soft" placeholder="Go for the promotion." ></textarea>
+                <br><br>
+                <label for="Repeat">Repeat:</label>
+                <input type="text" id="Repeat" name="Repeat" placeholder="N/A">
+            </div>
+            <div class="column">
+                <label for="Reminder">Reminder:</label>
+                <br><br>
+                <label for="Alarm">Alarm:</label>
+                <input type="text" id="Alarm" name="Alarm" placeholder="15 minutes before">
+                <br><br>
+                <label for="Desc">Description:</label>
+                <textarea name="text" rows="14" cols="10" wrap="soft" placeholder="Go for the promotion." ></textarea>
+            </div>
+        </div>
+        <div class="button">
+            <button>Create</button>
+        </div>
+
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>
