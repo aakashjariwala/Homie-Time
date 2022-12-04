@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>profile</title>
+		<title>createAccount</title>
 	</head>
 	<style>
 		.nav{
@@ -18,6 +18,7 @@
 			color: gray;
 			font-size: 25px;
 			background-color: white;
+
 		}
 
 		.box{
@@ -37,10 +38,11 @@
 			margin-top: 30px;
 			margin: 30px;
 			height: 80%;
-			width: 98%;
+			width: 50%;
+	
 		}
 
-		.display{
+		.form .display{
 			display: block;
 			/*position: relative;
 			outline: 2px solid red; */
@@ -49,6 +51,7 @@
 			left: 300px;
 			margin-top: 40px;
 			padding-top: 50px;
+		
 		}
 
 		/*
@@ -69,6 +72,8 @@
 		}
 
 		.profile-image{
+			display: flex;
+			position: relative;
 			background-color: #F0F0F0;
 			/* outline: 2px solid blue; 
 			margin:  -600px auto;
@@ -106,44 +111,71 @@
 	</style>
 	<body class="main" style="background: linear-gradient(to bottom right,#D0E6E6, #DAE1F5);">
 		<div class="nav">
-			Profile
+			Create Account
 		</div>
 		<div class="box">
 			<div class="form">
 				<div class="x-icon">
-					<button onclick="location.href = '../home/'">
+					<button onclick="location.href = '..'">
 						<img src="{% static '/icons/x_out.png' %}" class="image"></img>
 					</button>
 				</div>
+				<form method="POST">
+					{% csrf_token %}
 					<div class="display">
 						<!-- Form Fields -->
 						<div class="Field">
 							<label class="user" for="firstid">Name:</label>
-							<input style="background-color: #F0F0F0;" type="text" class="user" id="usernameID" name="name" value="{{firstname}} {{lastname}}">    
+							<input style="background-color: #F0F0F0;" id="firstid" name="firstname" placeholder="Enter First Name" type="text" required>
+							<input style="background-color: #F0F0F0;" id="lastnameid" name="lastname" placeholder="Enter Last Name" type="text" required>
 						</div>
-						<div class="Field">
-							<label class="user" for="">User ID:</label>
-							<input style="background-color: #F0F0F0;" type="text" class="user" id="usernameID" name="name" value="{{username}}">    
-						</div>
+		
 						<div class="Field">
 							<label class="user" for="">Email: </label>
-							<input style="background-color: #F0F0F0;" type="text" class="user" id="usernameID" name="name" value="{{email}}">    
+							<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter Email" name="email" required>
 						</div>
 						<div class="Field">
 							<label class="user" for="">Bio: </label>
-							<input style="background-color: #F0F0F0;" type="text" class="user" id="usernameID" name="name" value="{{bio}}">    
+							<textarea style="resize: none; background-color: #F0F0F0;" name="bio" id="" cols="43" rows="4" placeholder="About me..."></textarea>
 							<!-- <input style="width: 535px; height: 100px;" type="text"> -->
 						</div>
+						<div class="Field">
+							<label class="user" for="">Username: </label>
+							<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Create a username" name="username" required>
+						</div>
+						<div class="Field">
+							<label class="user" for="">Password: </label>
+							<input style="width: 400px; background-color: #F0F0F0;" type="password" placeholder="Create a Password" minlength="5" name="password">
+						</div>
+						<div class="Field">
+							<label class="user" for="">Re-Type Password: </label>
+							<input style="width: 400px; background-color: #F0F0F0;" type="password" placeholder="Re-Type Password" minlength="5" name="password-re" required>
+						</div>
 					</div>
-					<div class="profile-image">
+				<div class="profile-image">
 
-					</div>
 				</div>
-
-				<div class="btn-class">
-					<button onclick="location.href = '../home/'"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" id="saveID" name="saveForm" style="background-color: #bfd8e3; color: #574326;"> Home</button>
-				</div>
+			</div>	
+			<div class="btn-class">
+				<button onclick="confirmation();"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit" style="background-color: #bfd8e3; color: #574326;"> Save</button>
+			</div>
+		</form>
 		</div>
 		</div>
 	</body>
+	<Script>
+		function confirmation(){
+			alert("Awesome, you successfully created an account with Homietime! :)");
+		}
+		/*
+		function confirmation(exists){
+			console.log(exists);
+			if (exist == true) {
+				alert("Sorry a user with this username already exists in the database, try again!");
+			} else {
+				alert("Awesome, you successfully created an account with Homietime! :)");
+				document.getElementById("profile-form").submit();
+			}
+		} */
+	</Script>
 </html>

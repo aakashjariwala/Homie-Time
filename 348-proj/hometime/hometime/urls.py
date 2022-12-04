@@ -21,8 +21,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index, name="index"),
 
-    path('login/', views.login, name="login"),
+    path('', views.login, name="login"),
     path('profile/', views.profile, name="profile"),
+    path('createAccount/', views.createAccount, name="createAccount"),
     
     path('editEvent/', views.editEvent, name='editEvent'),
     path('createEvent/', views.createEvent, name='createEvent'),
@@ -32,6 +33,8 @@ urlpatterns = [
 
     path('homielist/', views.homielist, name='homielist'),
     path('findtime/', views.findtime, name='findtime'),
-    
+
+    path('test_post/', views.test_post, name="testpost"),
+
     path("__reload__/", include("django_browser_reload.urls")),
 ]

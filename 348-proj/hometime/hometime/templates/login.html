@@ -89,28 +89,37 @@
         <div class="x-icon">
             <img src="{% static '/icons/logo.png' %}" class="image"></img>
         </div>
+        <form action="" method="post" class="cred-form">
+            {% csrf_token %}
+            <!-- Username and password container -->
+            <div class="box">
+                <div class="text">
+                    <!-- Username Field -->
+                    <div class="username">
+                        <label class="user" for="usernameID">Username</label>
+                        <input style="background-color: #F0F0F0;" type="text" class="user" id="usernameID" name="username" placeholder="Enter your username">    
+                    </div>
 
-        <!-- Username and password container -->
-        <div class="box">
-			<div class="text">
+                    <!-- Password Field -->
+                    <div class="password">
+                        <label class="passfield" for="passwordID">Password</label>
+                        <input style="background-color: #F0F0F0;" type="password" class="pass" id="passwordID" name="PasswordHash" placeholder="Enter your password">
+                    </div>
 
-                <!-- Username Field -->
-                <div class="username">
-                    <label class="user" for="usernameID">Username</label>
-                    <input style="background-color: #F0F0F0;" type="text" class="user" id="usernameID" name="" placeholder="Enter your username">    
+                <!-- Button Field -->
+                    <div class="btn">
+                        <button style="background-color: #bfd8e3; color: #574326;" onclick="location.href = '../home/'"class="hover:bg-violet-600 text-white font-bold py-2 px-4 rounded-full" id="btnID"> login</button>
+                    </div>
                 </div>
+            </div>
+        </form>
+        
+        <div class="create" style="display: flex; justify-content: center;">
+            <button onclick="location.href = '../createAccount/'">
+                No Account? No Problem, Create an Accont by clicking me!
+            </button>
+        </div>
 
-                <!-- Password Field -->
-                <div class="password">
-                    <label class="passfield" for="passwordID">Password</label>
-                    <input style="background-color: #F0F0F0;" type="text" class="pass" id="passwordID" placeholder="Enter your password">
-                </div>
 
-               <!-- Button Field -->
-                <div class="btn">
-				    <button style="background-color: #bfd8e3; color: #574326;" onclick="location.href = '../home/'"class="hover:bg-violet-600 text-white font-bold py-2 px-4 rounded-full" id="btnID"> login</button>
-                </div>
-			</div>
-		</div>
 	</body>
 </html>
