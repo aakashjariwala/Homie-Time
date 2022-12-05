@@ -6,27 +6,92 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Homie List</title>
+
+  <style>
+        #grad1 {
+            height: 200px;
+            background-color: #d0e6e6; /* For browsers that do not support gradients */
+            background-image: linear-gradient(to bottom right, #d0e6e6, #dae1f5);
+        }
+
+        body > * {
+            flex-shrink: 0;
+        }
+
+        .title {
+            color: #707070;
+            font-size: 48;
+            margin-left: 6%;
+            margin-top: -6%;
+        }
+
+        .pfp {
+            margin-left: -5%;
+        }
+
+        .bigbox {
+            display: ruby-base-container;
+            background-color: white;
+            height: 337%;
+            width: 100%;
+            border-radius: 85px 85px 0px 0px;
+            flex-grow: 1;
+            padding: 50px 125px 125px 125px;
+            
+        }
+
+        .top {
+            background-color: white;
+            height: 15%;
+            width: 100%;
+            border-radius: 85px 85px 0px 0px;
+            flex-grow: 1;
+            padding: 0px 125px 125px 125px;
+        }
+
+        .friend {
+            background-color: gainsboro;
+        }
+
+        .search {
+            background-color: #BFD8E3; /* Green */
+            border: none;
+            padding: 10px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 25;
+            width: 200px;
+            height: 55px;
+            border-radius: 35px;
+            margin-right: 12%;
+        }
+
+        .search:hover {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+  </style>
 </head>
-<body>
+<body id="grad1">
     <div class="container mx-auto my-0 px-20 py-5 bg-gradient-to-r from-startcolor to-endcolor">
-        <img class="h-20 w-20 inline-block" src="https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg">
-        <h1 class="text-2xl text-textcolor inline-block ml-10">Friends</h1>
+        <img class="pfp h-20 w-20 inline-block" src="https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg">
+        <h1 class="title">Friends</h1>
     </div>
-    <div class="container my-0 px-20 py-10 border border-b-0 rounded-t-full">
+    <div class="bigbox">
         <h1 class="text-2xl text-textcolor underline">My Homies</h1>
-    </div>
-    <div class="container w-2/3 h-full border-r float-left">
-        <!--Friends are currently hard coded-->
-        <button class="ml-20 mt-10 pl-20 w-4/5 h-20 rounded-full bg-startcolor text-left text-xl">Suj</button>
-        <button class="ml-20 mt-5 pl-20 w-4/5 h-20 rounded-full bg-startcolor text-left text-xl">Amrita</button>
-        <button class="ml-20 mt-5 pl-20 w-4/5 h-20 rounded-full bg-startcolor text-left text-xl">Aakash</button>
-        <button class="ml-20 mt-5 pl-20 w-4/5 h-20 rounded-full bg-startcolor text-left text-xl">Becca</button>
-    </div>
-    <div class="container w-1/3 h-full float-right">
-        <p class="px-20 pt-10 text-xl flex justify-center text-textcolor">Add New Friend</p>
-        <p class="px-20 pt-5 text-xl float-left pl-24 pr-5 text-textcolor">ID:</p>
-        <input type="integer" class="w-40 mt-5 border border-textcolor" placeholder="Enter friend ID here">
-        <button class="w-40 h-10 mt-20 rounded-full bg-startcolor justify-center">Search</button>
+        <div class="container w-2/3 h-full border-r float-left"> 
+            <!--Friends are currently hard coded, probably will be a scroll group, that'll be different UI-->
+            <button class="friend ml-20 mt-10 pl-20 w-4/5 h-20 rounded-full bg-startcolor text-left text-xl">Suj</button>
+            <button class="friend ml-20 mt-5 pl-20 w-4/5 h-20 rounded-full bg-startcolor text-left text-xl">Amrita</button>
+            <button class="friend ml-20 mt-5 pl-20 w-4/5 h-20 rounded-full bg-startcolor text-left text-xl">Aakash</button>
+            <button class="friend ml-20 mt-5 pl-20 w-4/5 h-20 rounded-full bg-startcolor text-left text-xl">Becca</button>
+        </div>
+        <div class="container w-1/3 h-full float-right">
+            <p class="px-20 pt-10 text-xl flex justify-center text-textcolor">Add New Friend</p>
+            <p class="px-20 pt-5 text-xl float-left pl-24 pr-5 text-textcolor">ID:</p>
+            <input type="integer" class="w-40 mt-5 border border-textcolor" placeholder="Enter friend ID here">
+            <button class="search w-40 h-10 mt-20 rounded-full bg-startcolor justify-center">Search</button>
+        </div>
     </div>
 </body>
 </html>
