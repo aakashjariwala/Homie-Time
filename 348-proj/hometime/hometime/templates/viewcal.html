@@ -42,6 +42,8 @@
 
         div1 {
             height: 15%;
+            display: flex;
+            flex-direction: row;
         }
 
         div2 {
@@ -101,6 +103,16 @@
             box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
         }
 
+        .profile-image{
+			background-color: #F0F0F0;
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+            margin-left: 4%;
+            margin-right: -10%;
+            margin-top: 1%;
+		}
+
         .flex-container {
             display: flex;
             flex-direction: column;
@@ -122,6 +134,10 @@
 
 
     <div1>
+        <div class="profile-image" onclick="location.href = '../profile/' ">
+            <!-- put pfp here -->
+        </div>
+
         <h1>View Calendar</h1>
     </div1>
 

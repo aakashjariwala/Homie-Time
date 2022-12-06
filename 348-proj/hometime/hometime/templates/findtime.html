@@ -21,8 +21,8 @@
         .title {
             color: #707070;
             font-size: 48;
-            margin-left: 6%;
-            margin-top: -6%;
+            margin-left: 4%;
+            margin-top: 1%;
         }
 
         .bigbox {
@@ -67,6 +67,21 @@
             text-align: center;
         }
 
+        .profile-image{
+            background-color: #F0F0F0;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-left: -8%;
+            margin-right: 0%;
+            margin-top: 1%;
+		    }   
+
+        .topbar {
+            display: flex;
+            flex-direction: row;
+        }
+
         .pfp {
             margin-left: -5%;
         }
@@ -75,12 +90,11 @@
   </head>
   <body id="grad1">
     <div
-      class="container mx-auto my-0 px-20 py-5 bg-gradient-to-r from-startcolor to-endcolor"
+      class="topbar container mx-auto my-0 px-20 py-5 bg-gradient-to-r from-startcolor to-endcolor"
     >
-      <img
-        class="pfp h-20 w-20 inline-block"
-        src="https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg"
-      />
+      <div class="profile-image" onclick="location.href = '../profile/' ">
+          <!-- put pfp here -->
+      </div>
       <h1 class="title">
         Find Homie Time
       </h1>
