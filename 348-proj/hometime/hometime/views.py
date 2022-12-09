@@ -10,6 +10,7 @@ def index(request):
 def login(request):
 
     valid = True
+
     #get user object from database
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -23,10 +24,6 @@ def login(request):
         if valid:
             if user_obj.passwordHash == request.POST.get('PasswordHash'):
                 request.session["username"] = username
-                #request.session["firstname"] = user_obj.firstname
-                #request.session["lastname"] = user_obj.lastname
-                #request.session["email"] = user_obj.email
-                #request.session["bio"] = user_obj.bio
                 return HttpResponseRedirect("../home")     
             else:
                 return HttpResponse("Error, in log in! Check if username and password\nis correct or if you have an account with us :)")
@@ -49,21 +46,6 @@ def profile(request):
 def createAccount(request):
 
     #Add User object into database
-    """
-    context = {}
-    #user = User.objects.create()
-    if "username" in request.GET:
-        username = request.GET["username"]
-        print(username)
-        if (User.objects.filter(username=username)).exists():
-            context["exists"] = True
-            return redirect('../createAccount/', context)
-        else:
-            context["exists"] = False
-            return render(request, 'createAccount.html', context)
-    """
-
-        
     if request.method == "POST":
         username = request.POST.get("username")
         #print(username)    
@@ -88,16 +70,77 @@ def editEvent(request):
     return render(request, 'editEvent.html')
 
 def createEvent(request):
+    #Add Event object into database
+    if request.method == "POST":
+            event = Event.objects.create()
+            event.name = request.POST.get("name")
+            event.type = request.POST.get("type")
+            event.day = request.POST.get("day")
+            event.start_time = request.POST.get("start_time")
+            event.end_time = request.POST.get("end_time")
+            event.notes = request.POST.get("notes")
+            event.save()
+            return HttpResponseRedirect("..")
     return render(request, 'createEvent.html')
     
 def home(request):
+
     return render(request, 'home.html')
 
 def viewcal(request):
     return render(request, 'viewcal.html')
 
+
+def seeFriendList(username):
+    try:
+        return User.objects.get(username=username).myfriends.all()
+    except:
+        return False
+
+def seeEventsList(username):
+    try:
+        return Event.objects.get(username=username).myEvents.all()
+    except:
+        return False
+
+def getFriend(friendUserName):
+
+    friend_obj = None
+    try:
+        friend_obj = User.objects.get(username=friendUserName)
+        return friend_obj
+    except:
+        return False
+
+
 def homielist(request):
-    return render(request, 'homielist.html')
+    context = {}
+    username = request.session["username"]
+    print("Logged in as: " + username)
+    user_obj = User.objects.get(username=username)
+    if request.method == "POST":
+        desired_friend = request.POST.get('friend')
+        friend_obj = None
+        try:
+            friend_obj = User.objects.get(username=desired_friend)
+        except:
+            return HttpResponse("Sorry this user does not exist, you got played fool")
+        if Friend.objects.filter(friendedBy=username, friendUserName=desired_friend, friend=friend_obj).exists():
+            return HttpResponse("You're already friends")
+        else:
+            new_friend = Friend.objects.create(friendedBy=username, friendUserName=desired_friend, friend=user_obj)
+            new_friend.save()
+            print(new_friend.friendedBy, new_friend.friendUserName, User.objects.get(username=username).myfriends.all())
+            return HttpResponseRedirect("../homielist/")
+    
+    #Example of how you can access friend information
+    myfriend = seeFriendList(username=username)
+    context['friends'] = myfriend
+    #print(myfriend)
+    #myfriendInfo = getFriend(friendUserName=myfriend[0])
+    #print(myfriendInfo.bio)
+    
+    return render(request, 'homielist.html', context)
 
 def findtime(request):
     return render(request, 'findtime.html')
