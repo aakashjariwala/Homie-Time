@@ -1,141 +1,211 @@
-{% load tailwind_tags %} {% tailwind_css %}
-
+{% load static tailwind_tags %} {% tailwind_css %}
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>Create Event</title>
+	</head>
+	<style>
+		.nav{
+			display: flex;
+			position: relative;
+			padding-top: 5px;
+			border-radius: 15px;
+			color: #707070;
+            font-size: 48;
+            margin-top: 1.5%;
+            margin-left: 15%;
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+		}
 
-<style>
-    .column {
-        float: left;
-        width: 50%;
-    }
+		.box{
+			display: block;
+			position: relative;
+			height: 1000px;
+			margin-top: 20px;
+			background-color: white;
+			border-top-left-radius: 100px;
+			border-top-right-radius: 100px;
+			overflow: hidden;
+		}
 
-    /* Clear floats after the columns */
-    .row:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
+		.form{
+			display: flex;
+			flex-direction: row;
+			justify-content:flex-end;
+			margin-top: 30px;
+			margin: 30px;
+			height: 80%;
+			width: 50%;
+	
+		}
 
-    label {
-        display: inline-block;
-        width: 200px;
-        margin-right: 30px;
-        text-align: right;
-        vertical-align: top;
-    }
+		.form .display{
+			display: flex;
+			flex-direction: column;
+			/*position: relative;
+			outline: 2px solid red; */
+			height: 650px;
+			width: 50%;
+			left: 300px;
+			margin-top: 40px;
+			padding-top: 50px;
+		
+		}
 
-    input[type=datetime-local],
-    input[type=text],
-    input[type=textarea]
-     {
-        background-color: #F0F0F0;
-        border: 0;
-        width: 250px;
-    }
+		/*
+		.user{
+			outline: 2px solid pink;
+		} */
 
+		label {
+			vertical-align: baseline;
+		}
+		
+		input {
+			margin: 3%;
+			
+		}
 
-    textarea
-     {
-        background-color: #F0F0F0;
-        border: 0;
-        width: 250px;
-        height: 100px;
-        padding-top: 0;
-    }
+		textarea {
+			margin: 3%;
+		}
 
+		.Field{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 30px;
+			margin-right: 20px;
+		}
 
-    #rcorners1 {
-        border-radius: 25px;
-        padding: 20px;
-        width: 200px;
-        height: 150px;
-    }
+		.profile-image{
+			display: flex;
+			justify-content: center;
+			padding-top: 20%; /* TODO: you may want to remove padding when adding the actual pfp */
+			text-align: center;
+			/*position: fixed;*/
+			margin-left: 120%;
+			margin-top: -80%;
+			background-color: #F0F0F0;
+			/* outline: 2px solid blue; 
+			margin:  -600px auto; 
+			margin-right: 140px; */ 
+			/*right: 0; 
+			top: 0; */ 
+			width: 325px;
+			height: 40%;
+			border-radius: 50%;
+		}
+		
+		.btn-class{
+			position: relative;
+			display: flex;
+			justify-content: center;
+			height: 50px;
+			bottom: 100px;
+			margin-top: 10%;
+			/* top: 60px;
+			left: 1000px; */
+		}
 
+		.button {
+            background-color: #BFD8E3; /* Green */
+            border: none;
+            padding: 10px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 25;
+            width: 438px;
+            height: 65px;
+            border-radius: 35px;
+            margin-right: 50px;
+        }
 
-    .button {
-        margin: 0;
-        position: absolute;
-        top: 60%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        margin-top:100px;
-        background-color: #DAE1F5;
-        border-radius: 20px;
-        padding: 5px 30px;
-        color: gray;
-    }
+        .button1:hover {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
 
-    #container {
-        border-radius: 50px;
-        background: white;
-        padding: 20px;
-        height: 100%;
-        margin-top: 20px;
-
-    }
-
-    h1 {
-        font-size: 30px;
-        margin-left: 75px;
-        color: gray;
-        padding-top:15px;
-    }
-
-
-
-    body {
-        background-image: linear-gradient(to right, #D0E6E6, #DAE1F5);
-    }
-</style>
-
-<body>
-    <div id="topbar">
-    <img src="x_out.png" />
-       <h1>Create Event</h1> 
-    </div>
-    <div id="container">
-        <div class="row">
-            <img src="x_out.png" />
-            <div class="column">
-                <label for="Title">Title:</label>
-                <input type="text" id="Title" name="Name" placeholder="Boss' Birthday Party">
-                <br><br>
-                <label for="Type">Type:</label>
-                <input type="text" id="Type" name="Type" placeholder="Work">
-                <br><br>
-                <label for="Time">Time:</label>
-                <input type="datetime-local" id="Time" name="Time">
-                <br><br>
-                <label for="Desc">Description:</label>
-                <textarea name="text" rows="14" cols="10" wrap="soft" placeholder="Go for the promotion." ></textarea>
-                <br><br>
-                <label for="Repeat">Repeat:</label>
-                <input type="text" id="Repeat" name="Repeat" placeholder="N/A">
-            </div>
-            <div class="column">
-                <label for="Reminder">Reminder:</label>
-                <br><br>
-                <label for="Alarm">Alarm:</label>
-                <input type="text" id="Alarm" name="Alarm" placeholder="15 minutes before">
-                <br><br>
-                <label for="Desc">Description:</label>
-                <textarea name="text" rows="14" cols="10" wrap="soft" placeholder="Go for the promotion." ></textarea>
-            </div>
-        </div>
-        <div class="button">
-            <button onclick="location.href = '../view/'">Create</button>
-        </div>
-    </div>
+		#saveID{
+			position: absolute;
+			width: 200px;
+			height: 50px;
+		}
+		
+		/*
+		.display{
+			display: block;
+			outline: 4px solid blue;
+		}*/
 
 
-
-</body>
-
+	</style>
+	<body class="main" style="background: linear-gradient(to bottom right,#D0E6E6, #DAE1F5);">
+		<div class="nav">
+			Create Event
+		</div>
+		<div class="box">
+			<div class="form">
+				<div class="x-icon">
+					<button onclick="location.href = '..'">
+						<img src="{% static '/icons/x_out.png' %}" class="image"></img>
+					</button>
+				</div>
+				<form method="POST">
+					{% csrf_token %}
+					<div class="display">
+						<!-- Form Fields -->
+						<div class="Field">
+							<label class="event" style="margin-right: 30px;" for="firstid">Name: </label>
+							<input style="background-color: #F0F0F0;" id="firstid" name="name" placeholder="Enter Name" type="text" required>
+						</div>
+		
+						<div class="Field">
+							<label class="event" style="margin-right: 35px;" for="">Type: </label>
+							<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter Type" name="type" required>
+						</div>
+						<div class="Field">
+							<label class="event" style="margin-right: 50px;" for="">Day: </label>
+							<textarea style="resize: none; background-color: #F0F0F0;" name="day" id="" cols="43" rows="4" placeholder="Enter Day"></textarea>
+							<!-- <input style="width: 535px; height: 100px;" type="text"> -->
+						</div>
+						<div class="Field">
+							<label class="event" for="">Start Time: </label>
+							<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter Start Time" name="start_time" required>
+						</div>
+						<div class="Field">
+							<label class="event" for="">End Time: </label>
+							<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter End Time" minlength="5" name="end_time" required>
+						</div>
+						<div class="Field">
+							<label class="event" for="">Notes: </label>
+							<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter Notes" minlength="5" name="notes">
+						</div>
+					</div>
+				<div class="profile-image">
+					Click to set Profile Image
+				</div>
+			</div>	
+			<div class="btn-class">
+				<button class="button button1" onclick="confirmation();">Create Event!</button>
+			</div>
+		</form>
+		</div>
+		</div>
+	</body>
+	<Script>
+		function confirmation(){
+			alert("Awesome, you successfully created an event! :)");
+		}
+		/*
+		function confirmation(exists){
+			console.log(exists);
+			if (exist == true) {
+				alert("Sorry a user with this username already exists in the database, try again!");
+			} else {
+				alert("Awesome, you successfully created an account with Homietime! :)");
+				document.getElementById("profile-form").submit();
+			}
+		} */
+	</Script>
 </html>
