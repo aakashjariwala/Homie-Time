@@ -70,6 +70,17 @@ def editEvent(request):
     return render(request, 'editEvent.html')
 
 def createEvent(request):
+    #Add Event object into database
+    if request.method == "POST":
+            event = Event.objects.create()
+            event.name = request.POST.get("name")
+            event.type = request.POST.get("type")
+            event.day = request.POST.get("day")
+            event.start_time = request.POST.get("start_time")
+            event.end_time = request.POST.get("end_time")
+            event.notes = request.POST.get("notes")
+            event.save()
+            return HttpResponseRedirect("..")
     return render(request, 'createEvent.html')
     
 def home(request):
@@ -83,6 +94,12 @@ def viewcal(request):
 def seeFriendList(username):
     try:
         return User.objects.get(username=username).myfriends.all()
+    except:
+        return False
+
+def seeEventsList(username):
+    try:
+        return Event.objects.get(username=username).myEvents.all()
     except:
         return False
 
