@@ -100,7 +100,6 @@ def homielist(request):
     context = {}
     username = request.session["username"]
     print("Logged in as: " + username)
-
     user_obj = User.objects.get(username=username)
     if request.method == "POST":
         desired_friend = request.POST.get('friend')
@@ -109,26 +108,20 @@ def homielist(request):
             friend_obj = User.objects.get(username=desired_friend)
         except:
             return HttpResponse("Sorry this user does not exist, you got played fool")
-        isfriend = False
-        try:
-            test = Friend.objects.get(friendedBy=username, friendUserName=desired_friend,friend=user_obj)
-            isfriend = True
-        except:
-            isfriend = False
-            pass
-        if isfriend == False:
-            new_friend = Friend.objects.create(friendedBy=username, friendUserName=desired_friend, friend=friend_obj)
-            print(new_friend.friendedBy, new_friend.friendUserName,User.objects.get(username=username).myfriends.all())
-        else:
+        if Friend.objects.filter(friendedBy=username, friendUserName=desired_friend, friend=friend_obj).exists():
             return HttpResponse("You're already friends")
-
-
+        else:
+            new_friend = Friend.objects.create(friendedBy=username, friendUserName=desired_friend, friend=user_obj)
+            new_friend.save()
+            print(new_friend.friendedBy, new_friend.friendUserName, User.objects.get(username=username).myfriends.all())
+            return HttpResponseRedirect("../homielist/")
+    
     #Example of how you can access friend information
-    myfriend = seeFriendList(username='george')
-    print(myfriend)
-    print(myfriend[0])
-    myfriendInfo = getFriend(friendUserName=myfriend[0])
-    print(myfriendInfo.bio)
+    myfriend = seeFriendList(username=username)
+    context['friends'] = myfriend
+    #print(myfriend)
+    #myfriendInfo = getFriend(friendUserName=myfriend[0])
+    #print(myfriendInfo.bio)
     
     return render(request, 'homielist.html', context)
 
