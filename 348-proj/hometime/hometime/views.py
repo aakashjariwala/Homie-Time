@@ -71,8 +71,10 @@ def editEvent(request):
 
 def createEvent(request):
     #Add Event object into database
+    username = request.session["username"]
+    user = User.objects.get(username=username)
     if request.method == "POST":
-            event = Event.objects.create()
+            event = Event.objects.create(user=user)
             event.name = request.POST.get("name")
             event.type = request.POST.get("type")
             event.day = request.POST.get("day")
@@ -80,7 +82,7 @@ def createEvent(request):
             event.end_time = request.POST.get("end_time")
             event.notes = request.POST.get("notes")
             event.save()
-            return HttpResponseRedirect("..")
+            return HttpResponseRedirect("../view")
     return render(request, 'createEvent.html')
     
 def home(request):
