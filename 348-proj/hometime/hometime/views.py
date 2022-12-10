@@ -165,15 +165,17 @@ def homielist(request):
 def findtime(request):
 
     context = {}
-    username = request.session['username']
-    user = User.objects.get(username=username)
+    username = request.session["username"]
+    user_obj = User.objects.get(username=username)
+    
+    friends = seeFriendList(username)
+    context['friends'] = friends
     events = seeEventsList(username)
     #event = Event.objects.filter(event_id=).values('id')
     #print(event)
 
     #Right now I am getting all items but I need to filter these
     #items based on user id
-    events = seeEventsList(user)
     print(events)
 
     return render(request, 'findtime.html', context)

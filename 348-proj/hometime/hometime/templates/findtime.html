@@ -21,8 +21,8 @@
         .title {
             color: #707070;
             font-size: 48;
-            margin-left: 4%;
-            margin-top: 1%;
+            margin-left: 6%;
+            margin-top: -6%;
         }
 
         .bigbox {
@@ -45,12 +45,13 @@
             background-color: #BFD8E3; /* Green */
             border: none;
             padding: 10px 32px;
+            margin-left: 20px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 25;
-            width: 338px;
-            height: 65px;
+            font-size: 20;
+            width: 300px;
+            height: 60px;
             border-radius: 35px;
             margin-right: 50px;
         }
@@ -67,21 +68,6 @@
             text-align: center;
         }
 
-        .profile-image{
-            background-color: #F0F0F0;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-left: -8%;
-            margin-right: 0%;
-            margin-top: 1%;
-		    }   
-
-        .topbar {
-            display: flex;
-            flex-direction: row;
-        }
-
         .pfp {
             margin-left: -5%;
         }
@@ -90,37 +76,57 @@
   </head>
   <body id="grad1">
     <div
-      class="topbar container mx-auto my-0 px-20 py-5 bg-gradient-to-r from-startcolor to-endcolor"
+      class="container mx-auto my-0 px-20 py-5 bg-gradient-to-r from-startcolor to-endcolor"
     >
-      <div class="profile-image" onclick="location.href = '../profile/' ">
-          <!-- put pfp here -->
-      </div>
+      <img
+        class="pfp h-20 w-20 inline-block"
+        src="https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg"
+      />
       <h1 class="title">
         Find Homie Time
       </h1>
     </div>
     <div class="bigbox">
       <!--Insert X button here-->
+      <div>
+        <button class="float-right" onclick="location.href = '../home'">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRIlYKmHhvCaQHkvcgwXb9a0NcUlMayuADUw&usqp=CAU" class="h-10 w-10"></img>
+        </button>
+      </div>
 
       <div class="selection">
         <h1 class="text-2xl text-textcolor inline-block">
           Meeting times for you and
         </h1>
+
+        
+        <select name="selectTime" class="ml-20 w-100">
+        {% for friend in friends %}
+          <option>{{friend}}</option>
+        {% endfor %}
+        </select>
+       
+
+        <!--
         <button
           data-dropdown-toggle="dropdown"
           class="button button1"
         >
           Please select
         </button>
+        -->
+
+
         <br /><br />
         <h1 class="text-2xl text-textcolor inline-block">of duration:</h1>
-        <button
-          data-dropdown-toggle="dropdown"
-          class="button button1"
-        >
-          Please select
-        </button>
-      </div>
+
+        <select name="selectTime" class="ml-20 w-100">
+          <option value="15">15 minutes</option>
+          <option value="30">30 minutes</option>
+          <option value="60">1 hour</option>
+          <option value="120">2 hours</option>
+        </select>
+
       <div class="results">
         <!--Insert matching time slots here-->
         <br /><br /><br /><br /><br /><br /><br />show results<br /><br /><br /><br /><br /> <!-- remove breaks when implementing result time slots-->
