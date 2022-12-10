@@ -90,7 +90,15 @@ def home(request):
     return render(request, 'home.html')
 
 def viewcal(request):
-    return render(request, 'viewcal.html')
+    context = {}
+    context["name"] = "Birthday"
+    context["type"] = "Party"
+    context["day"] = "Monday December 12"
+    context["start_time"] = "7 pm"
+    context["end_time"] = "7 pm"
+    context["notes"] = "yuhhhhhhhhhhhhhhh"
+    # return render(request, 'viewcal.html')
+    return render(request, 'viewcal.html', context)
 
 
 def seeFriendList(username):

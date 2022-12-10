@@ -92,12 +92,7 @@
             display: flex;        
             justify-content: flex-start; 
             flex-direction: row-reverse; 
-            border-color: #707070;
-            border-top: #BFD8E3;
-            border-left: #BFD8E3;
-            border-right: #BFD8E3;
             padding: 1%;
-            border-width: 3px;
             height: 17%;
         }
 
@@ -108,10 +103,10 @@
             text-align: left;
             text-decoration: none;
             display: inline-block;
-            font-size: 10;
-            width: 50px;
+            font-size: 20;
+            width: 100%;
             height: 50px;
-            border-radius: 35px;
+            border-radius: 15px;
             margin-right: 50px;
         }
 
@@ -260,10 +255,9 @@
                 <div3 class="flex-container">
                 
                     <div class="event">
-                        <button class="button button1" onclick="location.href = '../editEvent/'">
-                            <img src="{% static '/icons/edit_button.png' %}" alt="edit"/>
-                        </button>
-                        <p>event name</p>
+                            <button class="button button1" onclick="location.href = '../editEvent/'">
+                            {{name}} {{type}}: {{day}} from {{start_time}} to {{end_time}}
+                            </button>
                     </div>
                 </div3>
             </div6>
