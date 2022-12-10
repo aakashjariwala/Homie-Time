@@ -253,15 +253,29 @@
             <div6 class="flex-container">
                 <label>Events for Day MM/DD/YYYY:</label>
                 <div3 class="flex-container">
-                
                     <div class="event">
-                            <button class="button button1" onclick="location.href = '../editEvent/'">
-                            {{name}} {{type}}: {{day}} from {{start_time}} to {{end_time}}
+                        <form method="POST">
+                            {% csrf_token %}
+                            {% for event in events %}
+                            <button name="eventButton" value={{event.event_id}}>
+                                {{event.name}} {{event.type}}: {{event.day}} from {{event.start_time}} to {{event.end_time}}
                             </button>
+                            {% endfor %}
+                        </form>
                     </div>
+                    
+                    {% comment %}
+                    <div class="event">
+                        <button class="button button1" onclick="location.href = '../editEvent/'">
+                        {{name}} {{type}}: {{day}} from {{start_time}} to {{end_time}}
+                        </button>
+                        <button class="button button1" onclick="location.href = '../editEvent/'">
+                            {{name}} {{type}}: {{day}} from {{start_time}} to {{end_time}}
+                        </button>
+                    </div>
+                    {% endcomment %}
                 </div3>
             </div6>
-
             <div5>
                 <div class="wrapper">
                     <header>
@@ -295,6 +309,9 @@
     </div2>
 
     <script>
+
+        
+
         // ! Make this code more "mine"
 
         const daysTag = document.querySelector(".days"),

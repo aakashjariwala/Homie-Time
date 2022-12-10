@@ -116,20 +116,16 @@
        <h1>Edit Event</h1> 
     </div>
     <div id="container">
-        <div class="row">
+        <button onclick="location.href = '../home/' ">
             <img src="{% static '/icons/x_out.png' %}" />
+        </button>
+        <div class="row">
             <div class="column">
                 <label for="Title">Title:</label>
-                <input type="text" id="Title" name="Name" placeholder="Boss' Birthday Party">
-                <br><br>
-                <label for="Type">Type:</label>
-                <input type="text" id="Type" name="Type" placeholder="Work">
+                <input type="text" id="Title" name="Name" value="{{event.name}}" placeholder="Boss' Birthday Party">
                 <br><br>
                 <label for="Time">Time:</label>
                 <input type="datetime-local" id="Time" name="Time">
-                <br><br>
-                <label for="Desc">Description:</label>
-                <textarea name="text" rows="14" cols="10" wrap="soft" placeholder="Go for the promotion." ></textarea>
                 <br><br>
                 <label for="Repeat">Repeat:</label>
                 <input type="text" id="Repeat" name="Repeat" placeholder="N/A">

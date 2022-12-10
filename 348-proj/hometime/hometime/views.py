@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect, redirect
 from .models import *
 from django.http import *
 from .forms import *
+import uuid
 
 
 def index(request):
@@ -95,17 +96,34 @@ def home(request):
     return render(request, 'home.html')
 
 def viewcal(request):
-    context = {}
 
-
-    return render(request, 'viewcal.html', context)
     context = {}
-    context["name"] = "Birthday"
-    context["type"] = "Party"
-    context["day"] = "Monday December 12"
-    context["start_time"] = "7 pm"
-    context["end_time"] = "7 pm"
-    context["notes"] = "yuhhhhhhhhhhhhhhh"
+    username = request.session['username']
+    user = User.objects.get(username=username)
+
+    events = seeEventsList(username=username)
+    print(events)
+    event_list = []
+    for event in events:
+        val = uuid.UUID(str(event))
+        event_list.append(Event.objects.get(event_id=val))
+    
+
+    context['events'] = event_list
+    if request.method == "POST":
+        context2 = {}
+        if 'eventButton' in request.POST:
+           data = request.POST['eventButton']
+           event_obj = getEvent(data)
+           context2['event'] = event_obj
+           return render(request, 'editEvent.html', context2)
+
+           print("-----------------")
+           print(data)
+           print("-----------------")
+
+        #print(btn_value)
+
     # return render(request, 'viewcal.html')
     return render(request, 'viewcal.html', context)
 
@@ -119,6 +137,13 @@ def seeFriendList(username):
 def seeEventsList(username):
     try:
         return User.objects.get(username=username).myEvents.all()
+    except:
+        return False
+
+def getEvent(event_id):
+
+    try:
+        return Event.objects.get(event_id=uuid.UUID(event_id))
     except:
         return False
 
@@ -162,6 +187,13 @@ def homielist(request):
     
     return render(request, 'homielist.html', context)
 
+
+def calculateAvailabilty(user_obj, friend_obj):
+
+    
+
+    return 
+
 def findtime(request):
 
     context = {}
@@ -169,14 +201,21 @@ def findtime(request):
     user_obj = User.objects.get(username=username)
     
     friends = seeFriendList(username)
+    print(friends)
+    friend_obj = getFriend(friends[0])
+    val = calculateAvailabilty(user_obj, friend_obj)
+    print(val)
+
+
     context['friends'] = friends
     events = seeEventsList(username)
+
+
     #event = Event.objects.filter(event_id=).values('id')
     #print(event)
 
     #Right now I am getting all items but I need to filter these
     #items based on user id
-    print(events)
 
     return render(request, 'findtime.html', context)
 
