@@ -70,6 +70,20 @@
 			margin: 3%;
 		}
 
+		.column1 {
+			display: flex;
+			flex-direction: column;
+			margin-left: 0%;
+		}
+
+		.column {
+			display: flex;
+			flex-direction: column;
+			margin-left: 200%;
+			margin-right: -300%;
+			margin-top: -150%;
+		}
+
 		.Field{
 			display: flex;
 			align-items: center;
@@ -120,6 +134,7 @@
             height: 65px;
             border-radius: 35px;
             margin-right: 50px;
+			margin-top: -20%;
         }
 
         .button1:hover {
@@ -132,11 +147,11 @@
 			height: 50px;
 		}
 		
-		/*
+		
 		.display{
-			display: block;
-			outline: 4px solid blue;
-		}*/
+			display: flex;
+			flex-direction: row;
+		}
 
 
 	</style>
@@ -147,7 +162,7 @@
 		<div class="box">
 			<div class="form">
 				<div class="x-icon">
-					<button onclick="location.href = '..'">
+					<button onclick="location.href = 'home.html'">
 						<img src="{% static '/icons/x_out.png' %}" class="image"></img>
 					</button>
 				</div>
@@ -155,36 +170,37 @@
 					{% csrf_token %}
 					<div class="display">
 						<!-- Form Fields -->
-						<div class="Field">
-							<label class="event" style="margin-right: 30px;" for="firstid">Name: </label>
-							<input style="background-color: #F0F0F0;" id="firstid" name="name" placeholder="Enter Name" type="text" required>
+						<div class="column1">
+							<div class="Field">
+								<label class="event" style="margin-right: 30px;" for="firstid">Name: </label>
+								<input style="background-color: #F0F0F0;" id="firstid" name="name" placeholder="Enter Name" type="text" required>
+							</div>
+			
+							<div class="Field">
+								<label class="event" style="margin-right: 35px;" for="">Type: </label>
+								<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter Type" name="type" required>
+							</div>
+							<div class="Field">
+								<label class="event" style="margin-right: 50px;" for="">Day: </label>
+								<textarea style="resize: none; background-color: #F0F0F0;" name="day" id="" cols="43" rows="4" placeholder="Enter Day"></textarea>
+								<!-- <input style="width: 535px; height: 100px;" type="text"> -->
+							</div>
 						</div>
-		
-						<div class="Field">
-							<label class="event" style="margin-right: 35px;" for="">Type: </label>
-							<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter Type" name="type" required>
-						</div>
-						<div class="Field">
-							<label class="event" style="margin-right: 50px;" for="">Day: </label>
-							<textarea style="resize: none; background-color: #F0F0F0;" name="day" id="" cols="43" rows="4" placeholder="Enter Day"></textarea>
-							<!-- <input style="width: 535px; height: 100px;" type="text"> -->
-						</div>
-						<div class="Field">
-							<label class="event" for="">Start Time: </label>
-							<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter Start Time" name="start_time" required>
-						</div>
-						<div class="Field">
-							<label class="event" for="">End Time: </label>
-							<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter End Time" minlength="5" name="end_time" required>
-						</div>
-						<div class="Field">
-							<label class="event" for="">Notes: </label>
-							<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter Notes" minlength="5" name="notes">
+						<div class="column">
+							<div class="Field">
+								<label class="event" for="">Start Time: </label>
+								<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter Start Time" name="start_time" required>
+							</div>
+							<div class="Field">
+								<label class="event" for="">End Time: </label>
+								<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter End Time" minlength="5" name="end_time" required>
+							</div>
+							<div class="Field">
+								<label class="event" for="">Notes: </label>
+								<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter Notes" minlength="5" name="notes">
+							</div>
 						</div>
 					</div>
-				<div class="profile-image">
-					Click to set Profile Image
-				</div>
 			</div>	
 			<div class="btn-class">
 				<button class="button button1" onclick="confirmation();">Create Event!</button>
@@ -197,15 +213,5 @@
 		function confirmation(){
 			alert("Awesome, you successfully created an event! :)");
 		}
-		/*
-		function confirmation(exists){
-			console.log(exists);
-			if (exist == true) {
-				alert("Sorry a user with this username already exists in the database, try again!");
-			} else {
-				alert("Awesome, you successfully created an account with Homietime! :)");
-				document.getElementById("profile-form").submit();
-			}
-		} */
 	</Script>
 </html>
