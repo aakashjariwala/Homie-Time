@@ -70,17 +70,24 @@ def editEvent(request):
     return render(request, 'editEvent.html')
 
 def createEvent(request):
+    
     #Add Event object into database
+    username = request.session['username']
+    user = User.objects.get(username=username)
     if request.method == "POST":
-            event = Event.objects.create()
-            event.name = request.POST.get("name")
+            name = request.POST.get("name")
+            start_time = request.POST.get("start_time")
+            if Event.objects.filter(name=name, start_time=start_time).exists():
+                return HttpResponse("Sorry event like this already exists!")
+            event = Event.objects.create(user=user)
+            event.name = name
+            event.start_time = start_time
             event.type = request.POST.get("type")
             event.day = request.POST.get("day")
-            event.start_time = request.POST.get("start_time")
             event.end_time = request.POST.get("end_time")
             event.notes = request.POST.get("notes")
             event.save()
-            return HttpResponseRedirect("..")
+            return HttpResponseRedirect("../home/")
     return render(request, 'createEvent.html')
     
 def home(request):
@@ -88,7 +95,10 @@ def home(request):
     return render(request, 'home.html')
 
 def viewcal(request):
-    return render(request, 'viewcal.html')
+    context = {}
+
+
+    return render(request, 'viewcal.html', context)
 
 
 def seeFriendList(username):
@@ -99,7 +109,7 @@ def seeFriendList(username):
 
 def seeEventsList(username):
     try:
-        return Event.objects.get(username=username).myEvents.all()
+        return User.objects.get(username=username).myEvents.all()
     except:
         return False
 
@@ -114,6 +124,7 @@ def getFriend(friendUserName):
 
 
 def homielist(request):
+
     context = {}
     username = request.session["username"]
     print("Logged in as: " + username)
@@ -143,7 +154,20 @@ def homielist(request):
     return render(request, 'homielist.html', context)
 
 def findtime(request):
-    return render(request, 'findtime.html')
+
+    context = {}
+    username = request.session['username']
+    user = User.objects.get(username=username)
+    events = seeEventsList(username)
+    #event = Event.objects.filter(event_id=).values('id')
+    #print(event)
+
+    #Right now I am getting all items but I need to filter these
+    #items based on user id
+    events = seeEventsList(user)
+    print(events)
+
+    return render(request, 'findtime.html', context)
 
 def test_post(request):
     return render(request, 'login.html')
