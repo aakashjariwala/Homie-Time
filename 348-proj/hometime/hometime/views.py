@@ -175,8 +175,6 @@ def viewcal(request):
     return render(request, 'viewcal.html', context)
 
 
-
-
 def seeFriendList(username):
     try:
         return User.objects.get(username=username).myfriends.all()
@@ -273,11 +271,26 @@ def findtime(request):
     context = {}
     username = request.session["username"]
     user_obj = User.objects.get(username=username)
-    context['custom_image'] = user_obj.profile_pic
     
     friends = seeFriendList(username)
-
     context['friends'] = friends
+    events = seeEventsList(username)
+    context['events'] = events
+    
+    if request.method == "POST":
+        friendUsername = request.POST.get('selectFriend')
+        selectedDate = request.POST.get('selectDate')
+        context['friendUsername'] = friendUsername
+        context['selectedDate'] = selectedDate
+        
+        if selectedDate == "":
+            return HttpResponse("Please select a date!")
+    
+        if friendUsername == "noSelection":
+            return HttpResponse("Please select a friend to schedule Homie Time with!")
+        else:
+            friendEvents = seeEventsList(friendUsername)
+            context['friendEvents'] = friendEvents
 
     return render(request, 'findtime.html', context)
 

@@ -66,6 +66,8 @@
             border-radius: 20px;
             margin-top: 2%;
             text-align: center;
+            width: 49%;
+            display: inline-block;
         }
 
         .pfp {
@@ -94,46 +96,59 @@
         </button>
       </div>
 
-      <div class="selection">
-        <h1 class="text-2xl text-textcolor inline-block">
-          Meeting times for you and
-        </h1>
-
-        
-        <select name="selectTime" class="ml-20 w-100">
-        {% for friend in friends %}
-          <option>{{friend}}</option>
-        {% endfor %}
-        </select>
-       
-
-        <!--
-        <button
-          data-dropdown-toggle="dropdown"
-          class="button button1"
-        >
-          Please select
-        </button>
-        -->
-
-
-        <br /><br />
-        <h1 class="text-2xl text-textcolor inline-block">of duration:</h1>
-
-        <select name="selectTime" class="ml-20 w-100">
-          <option value="15">15 minutes</option>
-          <option value="30">30 minutes</option>
-          <option value="60">1 hour</option>
-          <option value="120">2 hours</option>
-        </select>
-
-      <div class="results">
-        <!--Insert matching time slots here-->
-        <br /><br /><br /><br /><br /><br /><br />show results<br /><br /><br /><br /><br /> <!-- remove breaks when implementing result time slots-->
+      <div>
+        <form method="POST"> 
+          {% csrf_token %}
+          <div>
+            <h1 class="text-2xl text-textcolor inline-block">
+              Meeting times for you and
+            </h1>
+            <select name="selectFriend" class="ml-20 w-100 inline-block">
+              <option value="noSelection">Please select</option>
+            {% for friend in friends %}
+              <option value="{{friend}}">{{friend}}</option>
+            {% endfor %}
+            </select>
+            <input type="submit" class="button button1 inline-block">
+          </div>
+          <br />
+          <div>
+            <h1 class="text-2xl text-textcolor inline-block">on this date:</h1>
+            <input type="date" name="selectDate" value="mm/dd/yyyy" class="inline-block ml-20">
+          </div>
+        </form>
       </div>
-      <h1 class="text-2xl text-textcolor ml-20 mt-10">
-        Looks like XX:XX PM to XX:XX PM is best on -----, XX/XX/XX
-      </h1>
+
+      <div>
+        <div class="results">
+          <!--Insert matching time slots here-->
+          <br />
+          <h1>Your events on {{selectedDate}}</h1>
+          <br>
+          {% for event in events %}
+            {% if event.day == selectedDate %}
+            <h1>{{event.start_time}}</h1>
+            <h1>{{event.end_time}}</h1>
+            <h1>{{event.day}}</h1>
+            <br>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="results">
+          <br>
+          <h1>{{friendUsername}}'s events on {{selectedDate}}</h1>
+          <br>
+          {% for friendEvent in friendEvents %}
+            {% if friendEvent.day == selectedDate %}
+            <h1>{{friendEvent.start_time}}</h1>
+            <h1>{{friendEvent.end_time}}</h1>
+            <h1>{{friendEvent.day}}</h1>
+            <br>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
     </div>
     
   </body>
