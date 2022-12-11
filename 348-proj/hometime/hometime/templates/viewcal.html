@@ -90,25 +90,25 @@
 
         .event {  
             display: flex;        
-            justify-content: flex-start; 
-            flex-direction: row-reverse; 
+            flex-direction: row; 
             padding: 1%;
-            height: 17%;
+            height: 100%;
+            overflow-y: scroll;
         }
 
         .button {
             background-color: #BFD8E3; /* Green */
             border: none;
-            padding: 15px 32px;
+            padding: 10px 32px;
             text-align: left;
             text-decoration: none;
             display: inline-block;
-            margin: 5px;
             font-size: 20;
-            width: 100%;
+            width: 78%;
             height: 50px;
             border-radius: 15px;
-            margin-right: 50px;
+            justify-content: center;
+            margin-bottom: 2%;
         }
 
         .button1:hover {
@@ -235,6 +235,41 @@
             background: #f2f2f2;
         }
 
+        .editBtn {
+            background-color: #6ebc56; /* Green */
+            color: #F0F0F0;
+            border: none;
+            padding: 10px 10px;
+            text-align: left;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20;
+            height: 50px;
+            border-radius: 15px;
+            justify-content: center;
+        }
+
+        .deleteBtn {
+            background-color: #e26a5f; /* Red */
+            color: #F0F0F0;
+            border: none;
+            padding: 10px 10px;
+            text-align: left;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20;
+            height: 50px;
+            border-radius: 15px;
+            justify-content: center;
+        }
+
+        .xout {
+            margin-top: 2%;
+			margin-bottom: -6%;
+            margin-left: 3%;
+            z-index: 2;
+		}
+
     </style>
 </head>
 <body id="grad1">
@@ -255,6 +290,10 @@
         <h1>View Calendar</h1>
     </div1>
 
+    <button class="xout" onclick="location.href = '../home/'">
+        <img src="{% static '/icons/x_out.png' %}" class="image"></img>
+    </button>
+
     <div2>
         <br><br>
         <div4 class="flex-container4">
@@ -266,7 +305,10 @@
                             {% csrf_token %}
                             {% for event in events %}
                             <a href="{% url 'editEvent' event.event_id %}" class="button button1"> {{event.name}}: {{event.day}} from {{event.start_time}} to {{event.end_time}} </a>
+                            <button class="editBtn" >Edit</button>
+                            <button class="deleteBtn" >Delete</button>
                             {% endfor %}
+                            
                         </form>
                     </div>
                     
