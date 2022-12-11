@@ -29,7 +29,7 @@ class Event(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='myEvents')
     name = models.CharField(max_length=50)
     type= models.CharField(max_length=50)
-    day = models.CharField(max_length=50, unique=True)
+    day = models.CharField(max_length=50)
     start_time = models.CharField(max_length=25)
     end_time= models.CharField(max_length=50)
     notes = models.CharField(max_length=300)
