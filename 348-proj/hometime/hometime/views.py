@@ -41,19 +41,33 @@ def profile(request):
     context["email"] = user.email
     context["username"] = user.username
     context["bio"] = user.bio
-
-
-    if request.method == "POST":
-        #try:
-        try:
-            form = ProfileEdit(files=request.FILES)
-            form.Meta.store_image = request.FILES
-            user.profile_pic = form.Meta.store_image['image']
-            user.save()
-            return HttpResponseRedirect("../profile/")
-        except:
-            return HttpResponse("Something went wrong with upload")
     context['custom_image'] = user.profile_pic
+
+    if 'name' in request.GET:
+        myname = request.GET['name']
+        lst = myname.split()
+        if len(lst) == 2:
+            user.firstname = lst[0]
+            user.lastname = lst[1]
+        elif len(lst) == 1:
+            user.firstname = lst[0]
+            user.lastname = ""
+        else:
+            user.firstname = ""
+            user.lastname = ""
+        user.save()
+    if 'email' in request.GET:
+        user.email = request.GET['email']
+        user.save()
+    if 'bio' in request.GET:
+        user.bio = request.GET['bio']
+        user.save()
+
+    
+
+
+    
+
     return render(request, 'profile.html', context)
 
 @transaction.atomic
@@ -134,6 +148,31 @@ def createEvent(request):
                 return HttpResponseRedirect("../home/")
     return render(request, 'createEvent.html')
     
+
+def editprofileimage(request):
+    context = {}
+    username = request.session['username']
+    user = User.objects.get(username=username)
+    if request.method == "POST":
+        #try:
+        try:
+            form = ProfileEdit(files=request.FILES)
+            form.Meta.store_image = request.FILES
+            print(request.POST.get("name"))
+            user.profile_pic = form.Meta.store_image['image']
+            user.save()
+            return HttpResponseRedirect("../profile/")
+        except:
+            return HttpResponse("Something went wrong with upload")
+    
+    context['custom_image'] = user.profile_pic
+
+
+    
+
+
+    return render(request, 'editprofileimage.html', context)
+
 def home(request):
 
     context = {}

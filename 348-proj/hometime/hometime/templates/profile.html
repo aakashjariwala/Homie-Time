@@ -20,9 +20,9 @@
 		}
 
 		.box{
-			display: flex;
-			flex-direction: row;
-			height: 100%;
+			display: block;
+			position: relative;
+			height: 1000px;
 			margin-top: 20px;
 			background-color: white;
 			border-top-left-radius: 100px;
@@ -32,9 +32,9 @@
 
 		.form{
 			display: flex;
-			flex-direction: row;
-			margin-top: 5%;
-			margin-left: 20%;
+			justify-content: space-around;
+			margin-top: 30px;
+			margin: 30px;
 			height: 80%;
 			width: 98%;
 		}
@@ -44,8 +44,8 @@
 			/*position: relative;
 			outline: 2px solid red; */
 			height: 650px;
-			width: 100%;
-			margin-left: -50%;
+			width: 50%;
+			left: 300px;
 			margin-top: 40px;
 			padding-top: 50px;
 		}
@@ -72,8 +72,8 @@
 			/* outline: 2px solid blue; 
 			margin:  -600px auto;
 			margin-right: 140px; */
-			margin-left: 100%;
-			margin-top: -160%;
+			margin-left: -6%;
+			margin-top: 100px;
 			width: 400px;
 			height: 400px;
 			border-radius: 50%;
@@ -102,7 +102,16 @@
             border-radius: 35px;
         }
 
+		.buttonEdit {
+			background-color: darkseagreen;
+		}
+
 		.buttonPfp {
+            margin-right: 50px;
+        }
+
+		.buttonEdtSve {
+			margin-top: -10%;
             margin-right: 50px;
         }
 
@@ -110,32 +119,9 @@
             box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
         }
 
-		.buttonEdit {
-            background-color: #95f079; /* Green */
-            border: none;
-            padding: 10px 32px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 25;
-            width: 360px;
-            height: 65px;
-            border-radius: 35px;
-			margin-top: -10%;
-			margin-left: 35%;
-        }
-
-        .buttonEdit:hover {
-            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-        }
-
 		.pfp {
 			display: flex;
 			flex-direction: column;
-		}
-
-		.xout {
-			margin-bottom: 45%;
-			margin-left: 3%;
 		}
 
 		/*
@@ -150,17 +136,19 @@
 		<div class="nav">
 			Profile
 		</div>
-		
 		<div class="box">
-			<button class="xout" onclick="location.href = '../home/'">
-				<img src="{% static '/icons/x_out.png' %}" class="image"></img>
-			</button>
 			<div class="form">
-				<form method="POST" enctype="multipart/form-data">
+				<div class="x-icon">
+					<button onclick="location.href = '../home/'">
+						<img src="{% static '/icons/x_out.png' %}" class="image"></img>
+					</button>
+				</div>
+				<form id="profile-fields">
+					{% csrf_token %}
 					<div class="display">
 						<!-- Form Fields -->
 						<div class="Field">
-							<label class="user" for="firstid">Name:</label>
+							<label class="user" name="test" for="firstid">Name:</label>
 							<input disabled style="background-color: #F0F0F0;" type="text" class="user" id="fullnameID" name="name" value="{{firstname}} {{lastname}}">    
 						</div>
 						<div class="Field">
@@ -177,46 +165,36 @@
 							<!-- <input style="width: 535px; height: 100px;" type="text"> -->
 						</div>
 					</div>
-					<div class="pfp">
-						<div id="pfpDisplay" class="profile-image">
-							{% if custom_image %}
-								<img
-								id="profile-image"
-								name="upload_picture"
-								src="{{custom_image.url}}"
-							/>
-							{% endif %}
-							<!-- put pfp here -->
-						</div>
-						<br/>
-						{% comment %}
-						<button hidden id="editPfp" class="button button1">Upload Profile Image</button>
-						{% endcomment %}
-					</div>
-
-					<div class="btn-class">
-						
-						{% csrf_token %}
-						<label
-							class="button button1"
-							hidden id="editPfp"
-							for="id_image"
-							>Upload Profile Image</label
-						>
-						<input type="file" name="image" accept="image/png, image/jpeg" id="id_image" class="hidden">
-						<button hidden onclick="hideBtns()" class="button button1" id="saveID" name="saveForm">Save Changes</button>
-					</div>
 				</form>
-			</div> <!-- form div close -->
-			
+					<div class="pfp">
+						<button onclick="location.href = '../editprofileimage/'">
+							<div class="profile-image">
+								{% if custom_image %}
+									<img
+									id="profile-image"
+									name="upload_picture"
+									src="{{custom_image.url}}"
+								/>
+								{% endif %}
+								<!-- put pfp here -->
+							</div>
+						</button>
+						<br/>
+					</div>
+				</div>
+
+				<div class="btn-class">
+					<button id="editbtn" onclick="exposeBtns()" class="button buttonEdit buttonEdtSve button1"> Edit Profile Information</button>
+					<button hidden id="editPfp" onclick="submitfields();" class="button button1">Save Changes</button>
+					
+				</div>
 		</div>
-		<button id="editbtn" onclick="exposeBtns()" class="buttonEdit">Edit</button>
+		</div>
+
 
 		<script>
 			function exposeBtns() {
 				editbtn.setAttribute('hidden', 'true');
-				pfpDisplay.setAttribute('hidden', 'true');
-
 				fullnameID.removeAttribute('disabled');
 				usernameID.removeAttribute('disabled');
 				emailID.removeAttribute('disabled');
@@ -227,10 +205,14 @@
 
 			}
 
+			function submitfields() {
+				document.getElementById("profile-fields").submit();
+
+			}
+
 			function hideBtns() {
 				editPfp.setAttribute('hidden', 'true');
 				saveID.setAttribute('hidden', 'true');
-
 				fullnameID.setAttribute('disabled', 'true');
 				usernameID.setAttribute('disabled', 'true');
 				emailID.setAttribute('disabled', 'true');

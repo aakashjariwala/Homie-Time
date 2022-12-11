@@ -26,6 +26,7 @@ urlpatterns = [
     path('', views.login, name="login"),
     path('profile/', views.profile, name="profile"),
     path('createAccount/', views.createAccount, name="createAccount"),
+    path('editprofileimage/', views.editprofileimage, name="editprofileimage"),
     
     #path('editEvent/', views.editEvent, name='editEvent'),
     path('editEvent/<event_id>', views.editEvent, name='editEvent'),
@@ -38,7 +39,9 @@ urlpatterns = [
     path('findtime/', views.findtime, name='findtime'),
     path('viewHomie', views.viewHomie, name="viewHomie"),
 
+
     path('test_post/', views.test_post, name="testpost"),
+    
 
     path("__reload__/", include("django_browser_reload.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

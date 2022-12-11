@@ -31,7 +31,7 @@ class ProfileEdit(forms.ModelForm):
     class Meta:
         model = User
         store_image = forms.ImageField()
-        fields = ["profile_pic",]
+        fields = ["firstname", "username", "email", "bio", "profile_pic",]
 
 
 
