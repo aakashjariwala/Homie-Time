@@ -151,33 +151,53 @@
 						</div>
 						<div class="Field">
 							<label class="user" for="">User ID:</label>
-							<input disabled style="background-color: #F0F0F0;" type="text" class="user" id="usernameID" name="name" value="{{username}}">    
+							<input disabled style="background-color: #F0F0F0;" type="text" class="user" id="usernameID" name="username" value="{{username}}">    
 						</div>
 						<div class="Field">
 							<label class="user" for="">Email: </label>
-							<input disabled style="background-color: #F0F0F0;" type="text" class="user" id="emailID" name="name" value="{{email}}">    
+							<input disabled style="background-color: #F0F0F0;" type="text" class="user" id="emailID" name="email" value="{{email}}">    
 						</div>
 						<div class="Field">
 							<label class="user" for="">Bio: </label>
-							<input disabled style="background-color: #F0F0F0;" type="text" class="user" id="bioID" name="name" value="{{bio}}">    
+							<input disabled style="background-color: #F0F0F0;" type="text" class="user" id="bioID" name="bio" value="{{bio}}">    
 							<!-- <input style="width: 535px; height: 100px;" type="text"> -->
 						</div>
 					</div>
 					<div class="pfp">
 						<div class="profile-image">
+							{% if custom_image %}
+								<img
+								id="profile-image"
+								name="upload_picture"
+								src="{{custom_image.url}}"
+							/>
+							{% endif %}
 							<!-- put pfp here -->
 						</div>
 						<br/>
+						{% comment %}
 						<button hidden id="editPfp" class="button button1">Upload Profile Image</button>
+						{% endcomment %}
 					</div>
 				</div>
 
 				<div class="btn-class">
 					<button id="editbtn" onclick="exposeBtns()" class="button buttonEdit buttonEdtSve button1"> Edit</button>
-					<button hidden onclick="hideBtns()" class="button buttonEdtSve button1" id="saveID" name="saveForm"> Save Changes</button>
+					<form method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+                        <label
+							class="button button1"
+							hidden id="editPfp"
+                            for="id_image"
+                            >Upload Profile Image</label
+                        >
+                        <input type="file" name="image" accept="image/png" id="id_image" class="hidden">
+						<button hidden onclick="hideBtns()" class="button buttonEdtSve button1" id="saveID" name="saveForm">Save Upload</button>
+					</form>
 				</div>
 		</div>
 		</div>
+
 
 		<script>
 			function exposeBtns() {

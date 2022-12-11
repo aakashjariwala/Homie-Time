@@ -27,6 +27,12 @@ class CreateEvent(forms.ModelForm):
         'notes'
         ]
 
+class ProfileEdit(forms.ModelForm):
+    class Meta:
+        model = User
+        store_image = forms.ImageField()
+        fields = ["profile_pic",]
+
 
 
 

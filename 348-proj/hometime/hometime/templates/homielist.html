@@ -91,6 +91,13 @@
     <div class="topbar container mx-auto my-0 px-20 py-5 bg-gradient-to-r from-startcolor to-endcolor">
         <div class="profile-image" onclick="location.href = '../profile/' ">
             <!-- put pfp here -->
+            {% if custom_image %}
+                <img
+                id="profile-image"
+                name="upload_picture"
+                src="{{custom_image.url}}"
+            />
+            {% endif %}
         </div>
         <h1 class="title">Friends</h1>
     </div>

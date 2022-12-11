@@ -9,6 +9,9 @@ class User(models.Model):
     passwordHash = models.CharField(max_length=25)
     email = models.CharField(max_length=50)
     bio = models.CharField(max_length=300)
+
+    profile_pic = models.ImageField(null=True, blank=True, upload_to="img/%y")
+
     #friends = models.ManyToManyField("User", blank=True)
     def __str__(self):
         return self.username

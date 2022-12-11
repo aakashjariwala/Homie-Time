@@ -112,6 +112,13 @@
     <div class="topbar" id="topbar">
         <div class="profile-image" onclick="location.href = '../profile/' ">
             <!-- put pfp here -->
+            {% if custom_image %}
+            <img
+            id="profile-image"
+            name="upload_picture"
+            src="{{custom_image.url}}"
+            />
+            {% endif %}
         </div>
        <h1>Edit Event</h1> 
     </div>

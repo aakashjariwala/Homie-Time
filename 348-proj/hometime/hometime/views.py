@@ -11,7 +11,6 @@ def index(request):
 def login(request):
 
     valid = True
-
     #get user object from database
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -42,6 +41,20 @@ def profile(request):
     context["username"] = user.username
     context["bio"] = user.bio
 
+
+    if request.method == "POST":
+        #try:
+        try:
+            form = ProfileEdit(files=request.FILES)
+            form.Meta.store_image = request.FILES
+            user.profile_pic = form.Meta.store_image['image']
+            user.save()
+            return HttpResponseRedirect("../profile/")
+        except:
+            return HttpResponse("Something went wrong with upload")
+    context['custom_image'] = user.profile_pic
+
+
     return render(request, 'profile.html', context)
 
 def createAccount(request):
@@ -68,6 +81,7 @@ def createAccount(request):
 
 
 def editEvent(request):
+
     return render(request, 'editEvent.html')
 
 def createEvent(request):
@@ -93,13 +107,23 @@ def createEvent(request):
     
 def home(request):
 
-    return render(request, 'home.html')
+    context = {}
+    username = request.session['username']
+    user = User.objects.get(username=username)
+
+
+    context['custom_image'] = user.profile_pic
+
+
+    return render(request, 'home.html', context)
 
 def viewcal(request):
 
     context = {}
     username = request.session['username']
     user = User.objects.get(username=username)
+
+    context['custom_image'] = user.profile_pic
 
     events = seeEventsList(username=username)
     print(events)
@@ -116,15 +140,9 @@ def viewcal(request):
            data = request.POST['eventButton']
            event_obj = getEvent(data)
            context2['event'] = event_obj
+           context2['custom_image'] = user.profile_pic
            return render(request, 'editEvent.html', context2)
 
-           print("-----------------")
-           print(data)
-           print("-----------------")
-
-        #print(btn_value)
-
-    # return render(request, 'viewcal.html')
     return render(request, 'viewcal.html', context)
 
 
@@ -161,6 +179,7 @@ def homielist(request):
 
     context = {}
     username = request.session["username"]
+    user_obj = User.objects.get(username=username)
     print("Logged in as: " + username)
     user_obj = User.objects.get(username=username)
     if request.method == "POST":
@@ -181,41 +200,24 @@ def homielist(request):
     #Example of how you can access friend information
     myfriend = seeFriendList(username=username)
     context['friends'] = myfriend
+    context['custom_image'] = user_obj.profile_pic
     #print(myfriend)
     #myfriendInfo = getFriend(friendUserName=myfriend[0])
     #print(myfriendInfo.bio)
     
     return render(request, 'homielist.html', context)
 
-
-def calculateAvailabilty(user_obj, friend_obj):
-
-    
-
-    return 
-
 def findtime(request):
 
     context = {}
     username = request.session["username"]
     user_obj = User.objects.get(username=username)
+    context['custom_image'] = user_obj.profile_pic
     
     friends = seeFriendList(username)
-    print(friends)
-    friend_obj = getFriend(friends[0])
-    val = calculateAvailabilty(user_obj, friend_obj)
-    print(val)
-
 
     context['friends'] = friends
     events = seeEventsList(username)
-
-
-    #event = Event.objects.filter(event_id=).values('id')
-    #print(event)
-
-    #Right now I am getting all items but I need to filter these
-    #items based on user id
 
     return render(request, 'findtime.html', context)
 
