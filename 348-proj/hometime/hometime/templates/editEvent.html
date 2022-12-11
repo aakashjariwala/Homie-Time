@@ -1,156 +1,218 @@
 {% load static tailwind_tags %} {% tailwind_css %}
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>Edit Event</title>
+	</head>
+	<style>
+		.nav{
+			display: flex;
+			position: relative;
+			padding-top: 5px;
+			border-radius: 15px;
+			color: #707070;
+            font-size: 48;
+            margin-top: 1.5%;
+            margin-left: 15%;
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+		}
 
-<style>
-    .column {
-        float: left;
-        width: 50%;
-    }
+		.box{
+			display: block;
+			position: relative;
+			height: 1000px;
+			margin-top: 20px;
+			background-color: white;
+			border-top-left-radius: 100px;
+			border-top-right-radius: 100px;
+			overflow: hidden;
+		}
 
-    /* Clear floats after the columns */
-    .row:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
+		.form{
+			display: flex;
+			flex-direction: row;
+			justify-content:flex-end;
+			margin-top: 30px;
+			margin: 30px;
+			height: 80%;
+			width: 50%;
+	
+		}
 
-    label {
-        display: inline-block;
-        width: 200px;
-        margin-right: 30px;
-        text-align: right;
-        vertical-align: top;
-    }
+		.form .display{
+			display: flex;
+			flex-direction: column;
+			/*position: relative;
+			outline: 2px solid red; */
+			height: 650px;
+			width: 50%;
+			left: 300px;
+			margin-top: 40px;
+			padding-top: 50px;
+		
+		}
 
-    input[type=datetime-local],
-    input[type=text],
-    input[type=textarea]
-     {
-        background-color: #F0F0F0;
-        border: 0;
-        width: 250px;
-    }
+		/*
+		.user{
+			outline: 2px solid pink;
+		} */
 
+		label {
+			vertical-align: baseline;
+		}
+		
+		input {
+			margin: 3%;
+			
+		}
 
-    textarea
-     {
-        background-color: #F0F0F0;
-        border: 0;
-        width: 250px;
-        height: 100px;
-        padding-top: 0;
-    }
+		textarea {
+			margin: 3%;
+		}
 
+		.column1 {
+			display: flex;
+			flex-direction: column;
+			margin-left: 0%;
+		}
 
-    #rcorners1 {
-        border-radius: 25px;
-        padding: 20px;
-        width: 200px;
-        height: 150px;
-    }
+		.column {
+			display: flex;
+			flex-direction: column;
+			margin-left: 200%;
+			margin-right: -300%;
+			margin-top: -150%;
+		}
 
-    .profile-image{
-        background-color: #F0F0F0;
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        margin-left: 4%;
-        margin-right: -10%;
-        margin-top: 1%;
-	}
+		.Field{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 30px;
+			margin-right: 20px;
+		}
 
+		.profile-image{
+			display: flex;
+			justify-content: center;
+			padding-top: 20%; /* TODO: you may want to remove padding when adding the actual pfp */
+			text-align: center;
+			/*position: fixed;*/
+			margin-left: 120%;
+			margin-top: -80%;
+			background-color: #F0F0F0;
+			/* outline: 2px solid blue; 
+			margin:  -600px auto; 
+			margin-right: 140px; */ 
+			/*right: 0; 
+			top: 0; */ 
+			width: 325px;
+			height: 40%;
+			border-radius: 50%;
+		}
+		
+		.btn-class{
+			position: relative;
+			display: flex;
+			justify-content: center;
+			height: 50px;
+			bottom: 100px;
+			margin-top: 10%;
+			/* top: 60px;
+			left: 1000px; */
+		}
 
-    .button {
-        margin: 0;
-        position: absolute;
-        top: 60%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        margin-top:100px;
-        background-color: #DAE1F5;
-        border-radius: 20px;
-        padding: 5px 30px;
-        color: gray;
-    }
+		.button {
+            background-color: #BFD8E3; /* Green */
+            border: none;
+            padding: 10px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 25;
+            width: 438px;
+            height: 65px;
+            border-radius: 35px;
+            margin-right: 50px;
+			margin-top: -20%;
+        }
 
-    #container {
-        border-radius: 50px;
-        background: white;
-        padding: 20px;
-        height: 100%;
-        margin-top: 20px;
+        .button1:hover {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
 
-    }
-
-    h1 {
-        font-size: 30px;
-        margin-top: 1%;
-        margin-left: 14%;
-        color: gray;
-        padding-top:15px;
-    }
-
-    .topbar {
-        display: flex;
-        flex-direction: row;
-    }
-
-    body {
-        background-image: linear-gradient(to right, #D0E6E6, #DAE1F5);
-    }
-</style>
-
-<body>
-    <div class="topbar" id="topbar">
-        <div class="profile-image" onclick="location.href = '../profile/' ">
-            <!-- put pfp here -->
-        </div>
-       <h1>Edit Event</h1> 
-    </div>
-    <div id="container">
-        <button onclick="location.href = '../home/' ">
-            <img src="{% static '/icons/x_out.png' %}" />
-        </button>
-        <div class="row">
-            <div class="column">
-                <label for="Title">Title:</label>
-                <input type="text" id="Title" name="Name" value="{{event.name}}" placeholder="Boss' Birthday Party">
-                <br><br>
-                <label for="Time">Time:</label>
-                <input type="datetime-local" id="Time" name="Time">
-                <br><br>
-                <label for="Repeat">Repeat:</label>
-                <input type="text" id="Repeat" name="Repeat" placeholder="N/A">
-            </div>
-            <div class="column">
-                <label for="Reminder">Reminder:</label>
-                <br><br>
-                <label for="Alarm">Alarm:</label>
-                <input type="text" id="Alarm" name="Alarm" placeholder="15 minutes before">
-                <br><br>
-                <label for="Desc">Description:</label>
-                <textarea name="text" rows="14" cols="10" wrap="soft" placeholder="Go for the promotion." ></textarea>
-            </div>
-        </div>
-        <div class="button">
-            <button onclick="location.href = '../view/'">Edit</button>
-        </div>
-
-    </div>
+		#saveID{
+			position: absolute;
+			width: 200px;
+			height: 50px;
+		}
+		
+		
+		.display{
+			display: flex;
+			flex-direction: row;
+		}
 
 
-
-
-
-
-</body>
-
+	</style>
+	<body class="main" style="background: linear-gradient(to bottom right,#D0E6E6, #DAE1F5);">
+		<div class="nav">
+			Edit Event
+		</div>
+		<div class="box">
+			<div class="form">
+				<div class="x-icon">
+					<button onclick="location.href = '../home/'">
+						<img src="{% static '/icons/x_out.png' %}" class="image"></img>
+					</button>
+				</div>
+				<form method="POST">
+					{% csrf_token %}
+					<div class="display">
+						<!-- Form Fields -->
+						<div class="column1">
+							<div class="Field">
+								<label class="event" style="margin-right: 30px;" for="firstid">Name: </label>
+								<input style="background-color: #F0F0F0;" id="firstid" name="name" placeholder="Enter Name" value="{{name}}" type="text" required>
+							</div>
+			
+							<div class="Field">
+								<label class="event" style="margin-right: 35px;" for="">Type: </label>
+								<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter Type" name="type" value="{{type}}"  required>
+							</div>
+							<div class="Field">
+								<label class="event" style="margin-right: 50px;" for="">Day: </label>
+								<input style="width: 400px; background-color: #F0F0F0;" name="day" id="" type="date" cols="43" rows="4" value="{{day}}"  placeholder="Enter Day">
+								<!-- <input style="width: 535px; height: 100px;" type="text"> -->
+							</div>
+						</div>
+						<div class="column">
+							<div class="Field">
+								<label class="event" for="">Start Time: </label>
+								<input style="width: 400px; background-color: #F0F0F0;" type="time" placeholder="Enter Start Time" value="{{start_time}}" name="start_time" required>
+							</div>
+							<div class="Field">
+								<label class="event" for="">End Time: </label>
+								<input style="width: 400px; background-color: #F0F0F0;" type="time" placeholder="Enter End Time" minlength="5" value="{{end_time}}"  name="end_time" required>
+							</div>
+							<div class="Field">
+								<label class="event" for="">Notes: </label>
+								<input style="width: 400px; background-color: #F0F0F0;" type="text" placeholder="Enter Notes" minlength="5" value="{{notes}}"  name="notes">
+							</div>
+						</div>
+					</div>
+			</div>	
+			<div class="btn-class">
+				<button class="button button1" onclick="confirmation();">Edit Event!</button>
+			</div>
+		</form>
+		</div>
+		</div>
+	</body>
+	<Script>
+		function confirmation(){
+			alert("Awesome, you successfully edited an event! :)");
+		}
+	</Script>
 </html>
+

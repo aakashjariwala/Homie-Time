@@ -1,5 +1,4 @@
 """hometime URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
@@ -25,7 +24,8 @@ urlpatterns = [
     path('profile/', views.profile, name="profile"),
     path('createAccount/', views.createAccount, name="createAccount"),
     
-    path('editEvent/', views.editEvent, name='editEvent'),
+    #path('editEvent/', views.editEvent, name='editEvent'),
+    path('editEvent/<event_id>', views.editEvent, name='editEvent'),
     path('createEvent/', views.createEvent, name='createEvent'),
 
     path('home/', views.home, name="home"),

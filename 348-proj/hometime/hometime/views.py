@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from .models import *
 from django.http import *
+from django.db import transaction
 from .forms import *
 import uuid
 
@@ -44,6 +45,7 @@ def profile(request):
 
     return render(request, 'profile.html', context)
 
+@transaction.atomic
 def createAccount(request):
 
     #Add User object into database
@@ -53,23 +55,52 @@ def createAccount(request):
         if User.objects.filter(username=username).exists():
             return HttpResponse("Sorry, A user with this username already exists, try again!")
         if request.POST.get("password") == request.POST.get("password-re"):
-            user = User.objects.create()
-            user.passwordHash = request.POST.get("password")
-            user.firstname = request.POST.get("firstname")
-            user.lastname = request.POST.get("lastname")
-            user.email = request.POST.get("email")
-            user.bio = request.POST.get("bio")
-            user.username = username
-            user.save()
+            with transaction.atomic():
+                user = User.objects.create()
+                user.passwordHash = request.POST.get("password")
+                user.firstname = request.POST.get("firstname")
+                user.lastname = request.POST.get("lastname")
+                user.email = request.POST.get("email")
+                user.bio = request.POST.get("bio")
+                user.username = username
+                user.save()
         else:
             return HttpResponse("Password does not match, try again!")
         return HttpResponseRedirect("..")
     return render(request, 'createAccount.html')
 
 
-def editEvent(request):
-    return render(request, 'editEvent.html')
 
+@transaction.atomic
+def editEvent(request, event_id):
+    event = Event.objects.get(event_id=uuid.UUID(event_id))
+    print("EVENT" + event.name)
+    context = {}
+    context["name"] = event.name
+    context["type"] = event.type
+    context["day"] = event.day
+    context["start_time"] = event.start_time
+    context["end_time"] = event.end_time
+    context["notes"] = event.notes
+
+    if request.method == "POST":
+            name = request.POST.get("name")
+            start_time = request.POST.get("start_time")
+            if Event.objects.filter(name=name, start_time=start_time).exists():
+                return HttpResponse("Sorry event like this already exists!")
+            with transaction.atomic():  
+                event = Event.objects.get(event_id=uuid.UUID(event_id))
+                event.name = name
+                event.start_time = start_time
+                event.type = request.POST.get("type")
+                event.day = request.POST.get("day")
+                event.end_time = request.POST.get("end_time")
+                event.notes = request.POST.get("notes")
+                event.save()
+                return HttpResponseRedirect("../view/")
+    return render(request, 'editEvent.html', context)
+    
+@transaction.atomic
 def createEvent(request):
     
     #Add Event object into database
@@ -80,15 +111,16 @@ def createEvent(request):
             start_time = request.POST.get("start_time")
             if Event.objects.filter(name=name, start_time=start_time).exists():
                 return HttpResponse("Sorry event like this already exists!")
-            event = Event.objects.create(user=user)
-            event.name = name
-            event.start_time = start_time
-            event.type = request.POST.get("type")
-            event.day = request.POST.get("day")
-            event.end_time = request.POST.get("end_time")
-            event.notes = request.POST.get("notes")
-            event.save()
-            return HttpResponseRedirect("../home/")
+            with transaction.atomic():  
+                event = Event.objects.create(user=user)
+                event.name = name
+                event.start_time = start_time
+                event.type = request.POST.get("type")
+                event.day = request.POST.get("day")
+                event.end_time = request.POST.get("end_time")
+                event.notes = request.POST.get("notes")
+                event.save()
+                return HttpResponseRedirect("../home/")
     return render(request, 'createEvent.html')
     
 def home(request):
@@ -110,22 +142,12 @@ def viewcal(request):
     
 
     context['events'] = event_list
-    if request.method == "POST":
-        context2 = {}
-        if 'eventButton' in request.POST:
-           data = request.POST['eventButton']
-           event_obj = getEvent(data)
-           context2['event'] = event_obj
-           return render(request, 'editEvent.html', context2)
 
-           print("-----------------")
-           print(data)
-           print("-----------------")
-
-        #print(btn_value)
 
     # return render(request, 'viewcal.html')
     return render(request, 'viewcal.html', context)
+
+
 
 
 def seeFriendList(username):
@@ -221,4 +243,3 @@ def findtime(request):
 
 def test_post(request):
     return render(request, 'login.html')
-
