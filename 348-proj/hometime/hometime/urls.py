@@ -36,6 +36,7 @@ urlpatterns = [
 
     path('homielist/', views.homielist, name='homielist'),
     path('findtime/', views.findtime, name='findtime'),
+    path('viewHomie', views.viewHomie, name="viewHomie"),
 
     path('test_post/', views.test_post, name="testpost"),
 

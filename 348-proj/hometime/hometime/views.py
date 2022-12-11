@@ -54,8 +54,6 @@ def profile(request):
         except:
             return HttpResponse("Something went wrong with upload")
     context['custom_image'] = user.profile_pic
-
-
     return render(request, 'profile.html', context)
 
 @transaction.atomic
@@ -207,6 +205,13 @@ def getFriend(friendUserName):
     except:
         return False
 
+def getfriendObjects(username):
+    myfriends = seeFriendList(username)
+    friendlist = []
+    for friend in myfriends:
+        friendlist.append(getFriend(friend))
+    return friendlist
+
 
 def homielist(request):
 
@@ -215,30 +220,53 @@ def homielist(request):
     user_obj = User.objects.get(username=username)
     print("Logged in as: " + username)
     user_obj = User.objects.get(username=username)
-    if request.method == "POST":
-        desired_friend = request.POST.get('friend')
-        friend_obj = None
-        try:
-            friend_obj = User.objects.get(username=desired_friend)
-        except:
-            return HttpResponse("Sorry this user does not exist, you got played fool")
-        if Friend.objects.filter(friendedBy=username, friendUserName=desired_friend, friend=friend_obj).exists():
-            return HttpResponse("You're already friends")
-        else:
-            new_friend = Friend.objects.create(friendedBy=username, friendUserName=desired_friend, friend=user_obj)
-            new_friend.save()
-            print(new_friend.friendedBy, new_friend.friendUserName, User.objects.get(username=username).myfriends.all())
-            return HttpResponseRedirect("../homielist/")
-    
-    #Example of how you can access friend information
     myfriend = seeFriendList(username=username)
+    if request.method == "POST":
+        if 'friend' in request.POST:
+            desired_friend = request.POST.get("friend")
+            friend_obj = None
+            try:
+                friend_obj = User.objects.get(username=desired_friend)
+                print(friend_obj)
+            except:
+                return HttpResponse("Sorry this user does not exist, you got played fool")
+            if Friend.objects.filter(friendedBy=username, friendUserName=desired_friend, friend=user_obj).exists():
+                print("friend exists")
+                return HttpResponse("You're already friends with this person!")
+            else:
+                print("created friend")
+                new_friend = Friend.objects.create(friendedBy=username, friendUserName=desired_friend, friend=user_obj)
+                new_friend.save()
+                print(new_friend.friendedBy, new_friend.friendUserName, User.objects.get(username=username).myfriends.all())
+                return HttpResponseRedirect("../homielist/")
+        elif 'viewHomie' in request.POST:
+            context2 = {}
+            data = request.POST['viewHomie']
+            friend = getFriend(data)
+            context2['firstname'] = friend.firstname
+            context2['lastname'] = friend.lastname
+            context2['email'] = friend.email
+            context2['bio'] = friend.bio
+            context2['username'] = friend.username
+            context2['custom_image'] = friend.profile_pic
+            return render(request, 'viewHomie.html', context2)
+
+    myfriend = getfriendObjects(username=username)
+
+    #Example of how you can access friend information
     context['friends'] = myfriend
     context['custom_image'] = user_obj.profile_pic
-    #print(myfriend)
-    #myfriendInfo = getFriend(friendUserName=myfriend[0])
-    #print(myfriendInfo.bio)
     
     return render(request, 'homielist.html', context)
+
+
+def viewHomie(request):
+    context = {}
+    username = request.session["username"]
+    friends = seeFriendList(username=username)
+    print(friends)
+
+    return render(request, "viewHomie.html")
 
 def findtime(request):
 
@@ -250,7 +278,6 @@ def findtime(request):
     friends = seeFriendList(username)
 
     context['friends'] = friends
-    events = seeEventsList(username)
 
     return render(request, 'findtime.html', context)
 
