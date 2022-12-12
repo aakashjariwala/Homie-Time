@@ -34,20 +34,13 @@ def profile(request):
 
     username = request.session["username"]
     user = User.objects.get(username=username)
+
     context = {}
 
     if 'name' in request.GET:
-        myname = request.GET['name']
-        lst = myname.split()
-        if len(lst) == 2:
-            user.firstname = lst[0]
-            user.lastname = lst[1]
-        elif len(lst) == 1:
-            user.firstname = lst[0]
-            user.lastname = ""
-        else:
-            user.firstname = ""
-            user.lastname = ""
+        user.firstname = request.GET['name']
+    if 'lastname' in request.GET:
+        user.lastname = request.GET['lastname']
     if 'email' in request.GET:
         user.email = request.GET['email']
     if 'bio' in request.GET:

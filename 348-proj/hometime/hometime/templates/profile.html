@@ -148,12 +148,12 @@
 					<div class="display">
 						<!-- Form Fields -->
 						<div class="Field">
-							<label class="user" name="test" for="firstid">Name:</label>
-							<input disabled style="background-color: #F0F0F0;" type="text" class="user" id="fullnameID" name="name" value="{{firstname}} {{lastname}}">    
+							<label class="user" name="test" for="firstid">Firstname:</label>
+							<input disabled style="background-color: #F0F0F0;" type="text" class="user" id="fullnameID" name="name" value="{{firstname}}">    
 						</div>
 						<div class="Field">
-							<label class="user" for="">User ID:</label>
-							<input disabled style="background-color: #F0F0F0;" type="text" class="user" id="usernameID" name="username" value="{{username}}">    
+							<label class="user" name="test" for="firstid">Lastname:</label>
+							<input disabled style="background-color: #F0F0F0;" type="text" class="user" id="lastnameID" name="lastname" value="{{lastname}}">    
 						</div>
 						<div class="Field">
 							<label class="user" for="">Email: </label>
@@ -196,7 +196,7 @@
 			function exposeBtns() {
 				editbtn.setAttribute('hidden', 'true');
 				fullnameID.removeAttribute('disabled');
-				usernameID.removeAttribute('disabled');
+				lastnameID.removeAttribute('disabled');
 				emailID.removeAttribute('disabled');
 				bioID.removeAttribute('disabled');
 
@@ -213,7 +213,7 @@
 				editPfp.setAttribute('hidden', 'true');
 				saveID.setAttribute('hidden', 'true');
 				fullnameID.setAttribute('disabled', 'true');
-				usernameID.setAttribute('disabled', 'true');
+				lastnameID.setAttribute('disabled', 'true');
 				emailID.setAttribute('disabled', 'true');
 				bioID.setAttribute('disabled', 'true');
 
