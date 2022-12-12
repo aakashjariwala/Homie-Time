@@ -28,7 +28,7 @@ urlpatterns = [
     path('createAccount/', views.createAccount, name="createAccount"),
     path('editprofileimage/', views.editprofileimage, name="editprofileimage"),
     
-    #path('editEvent/', views.editEvent, name='editEvent'),
+    path('deleteEvent/<event_id>', views.deleteEvent, name='deleteEvent'),
     path('editEvent/<event_id>', views.editEvent, name='editEvent'),
     path('createEvent/', views.createEvent, name='createEvent'),
 
