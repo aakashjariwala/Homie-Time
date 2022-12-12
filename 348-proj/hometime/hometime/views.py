@@ -32,6 +32,11 @@ def login(request):
                 return HttpResponse("Error, in log in! Check if username and password\nis correct or if you have an account with us :)")
     return render(request, 'login.html')
 
+def newprofilepage(request):
+
+    return render(request, "newprofilepage.html")
+
+
 def profile(request):
 
     username = request.session["username"]
