@@ -176,7 +176,6 @@ def viewcal(request):
     context = {}
     username = request.session['username']
     user = User.objects.get(username=username)
-
     context['custom_image'] = user.profile_pic
 
     events = seeEventsList(username=username)
@@ -284,7 +283,6 @@ def homielist(request):
 
 
 def viewHomie(request):
-    context = {}
     username = request.session["username"]
     friends = seeFriendList(username=username)
     print(friends)
