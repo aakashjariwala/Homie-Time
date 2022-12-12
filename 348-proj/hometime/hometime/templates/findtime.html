@@ -66,8 +66,12 @@
             border-radius: 20px;
             margin-top: 2%;
             text-align: center;
+            height: 60%;
             width: 49%;
             display: inline-block;
+            overflow-y: auto;
+            background-color: #BFD8E3;
+            font-size: 20;
         }
 
         .pfp {
@@ -123,13 +127,13 @@
         <div class="results">
           <!--Insert matching time slots here-->
           <br />
-          <h1>Your events on {{selectedDate}}</h1>
+          <h1>Your events on: {{selectedDate}}</h1>
           <br>
           {% for event in events %}
             {% if event.day == selectedDate %}
-            <h1>{{event.start_time}}</h1>
-            <h1>{{event.end_time}}</h1>
-            <h1>{{event.day}}</h1>
+            <h1>Event Name: {{event.name}}
+            <h1>Start Time: {{event.start_time}}</h1>
+            <h1>End Time: {{event.end_time}}</h1>
             <br>
             {% endif %}
           {% endfor %}
@@ -137,13 +141,13 @@
 
         <div class="results">
           <br>
-          <h1>{{friendUsername}}'s events on {{selectedDate}}</h1>
+          <h1>{{firstname}} {{lastname}}'s events on: {{selectedDate}}</h1>
           <br>
           {% for friendEvent in friendEvents %}
             {% if friendEvent.day == selectedDate %}
-            <h1>{{friendEvent.start_time}}</h1>
-            <h1>{{friendEvent.end_time}}</h1>
-            <h1>{{friendEvent.day}}</h1>
+            <h1>Event Name: {{friendEvent.name}}</h1>
+            <h1>Start Time: {{friendEvent.start_time}}</h1>
+            <h1>End Time: {{friendEvent.end_time}}</h1>
             <br>
             {% endif %}
           {% endfor %}

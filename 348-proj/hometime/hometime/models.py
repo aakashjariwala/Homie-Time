@@ -33,6 +33,10 @@ class Event(models.Model):
     start_time = models.CharField(max_length=25)
     end_time= models.CharField(max_length=50)
     notes = models.CharField(max_length=300)
+    class Meta:
+       indexes = [
+           models.Index(fields=['-day',]),
+    ]
 
     def __str__(self):
         val = str(self.event_id)

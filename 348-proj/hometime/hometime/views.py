@@ -3,6 +3,8 @@ from .models import *
 from django.http import *
 from django.db import transaction
 from .forms import *
+from .database_actions import PreparedStatementHandler
+
 import uuid
 import hashlib
 
@@ -57,6 +59,22 @@ def profile(request):
     context['custom_image'] = user.profile_pic
 
     return render(request, 'profile.html', context)
+
+def PreparedStatements(request, rtype, lst):
+
+    username = request.session["username"]
+    user = User.objects.get(username=username)
+    handler = PreparedStatementHandler(user)
+
+    for i in lst:
+        if rtype == i:
+            handler.insertDefaultUsers()
+        elif rtype == i:
+            handler.deletePastEvents()
+        else:
+            new_handler = PreparedStatementHandler(user)
+
+    return new_handler
 
 @transaction.atomic
 def createAccount(request):
@@ -316,7 +334,6 @@ def findtime(request):
     context['friends'] = friends
     events = seeEventsList(username)
     context['events'] = events
-    context['custom_image'] = user_obj.profile_pic
     
     if request.method == "POST":
         friendUsername = request.POST.get('selectFriend')
@@ -330,8 +347,12 @@ def findtime(request):
         if friendUsername == "noSelection":
             return HttpResponse("Please select a friend to schedule Homie Time with!")
         else:
+            events =  Event.objects.filter(day=selectedDate)
             friendEvents = seeEventsList(friendUsername)
             context['friendEvents'] = friendEvents
+            friend = User.objects.get(username=friendUsername)
+            context['firstname'] = friend.firstname
+            context['lastname'] = friend.lastname
 
     return render(request, 'findtime.html', context)
 
