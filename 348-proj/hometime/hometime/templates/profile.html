@@ -57,6 +57,15 @@
 
 		label {
 			vertical-align: baseline;
+			margin-right: 20px;
+		}
+
+		.email {
+			margin-right: 50px;
+		}
+
+		.bio {
+			margin-right: 66px;
 		}
 		
 		.Field{
@@ -124,11 +133,13 @@
 			flex-direction: column;
 		}
 
-		/*
+		
 		.display{
-			display: block;
-			outline: 4px solid blue;
-		}*/
+			display: flex;
+			flex-direction: column;
+			margin-left: -30%;
+		}
+
 
 
 	</style>
@@ -156,11 +167,11 @@
 							<input disabled style="background-color: #F0F0F0;" type="text" class="user" id="lastnameID" name="lastname" value="{{lastname}}">    
 						</div>
 						<div class="Field">
-							<label class="user" for="">Email: </label>
+							<label class="user email" for="">Email: </label>
 							<input disabled style="background-color: #F0F0F0;" type="text" class="user" id="emailID" name="email" value="{{email}}">    
 						</div>
 						<div class="Field">
-							<label class="user" for="">Bio: </label>
+							<label class="user bio" for="">Bio: </label>
 							<input disabled style="background-color: #F0F0F0;" type="text" class="user" id="bioID" name="bio" value="{{bio}}">    
 							<!-- <input style="width: 535px; height: 100px;" type="text"> -->
 						</div>
