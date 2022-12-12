@@ -51,6 +51,14 @@
 
         .friend {
             background-color: gainsboro;
+            border-radius: 50px 0px 0px 50px;
+        }
+
+        .delete {
+            background-color: #e26a5f;
+            border-radius: 0px 50px 50px 0px;
+            color: #F0F0F0;
+            width: 12%;
         }
 
         .search {
@@ -64,7 +72,7 @@
             width: 200px;
             height: 55px;
             border-radius: 35px;
-            margin-right: 12%;
+            margin-left: 100px;
         }
 
         .profile-image{
@@ -113,7 +121,8 @@
             <form method="POST">
                 {% csrf_token %}
                 {% for friend in friends %}
-                <button name="viewHomie" value="{{friend.username}}" class="friend ml-20 mt-10 pl-20 w-4/5 h-20 rounded-full bg-startcolor text-left text-xl">{{friend.firstname}} {{friend.lastname}}</button>
+                <button name="viewHomie" value="{{friend.username}}" class="friend mt-10 pl-20 w-4/5 h-20 bg-startcolor text-left text-xl">{{friend.firstname}} {{friend.lastname}}</button>
+                <button class="delete h-20 text-center text-xl">Delete</button>
                 {% endfor %}
             </form>
         </div>

@@ -77,12 +77,11 @@
         .button {
             background-color: #BFD8E3; /* Green */
             border: none;
-            padding: 10px 32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 25;
-            width: 438px;
+            width: 500px;
             height: 65px;
             border-radius: 35px;
             margin-right: 50px;
@@ -105,7 +104,11 @@
         .flex-container > div {
             display: flex;
             flex-direction: row;
-            margin: 10%;
+            margin-top: 10%;
+            margin-left: -5%;
+            margin-right: 6%;
+            margin-bottom: 6%;
+
         }
 
         .logout {
@@ -244,7 +247,19 @@
             flex-direction: column;
         }
 
+
         .viewBtn {
+            background-color: #BFD8E3; /* Green */
+            border: none;
+            padding: 10px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 25;
+            width: 438px;
+            height: 65px;
+            border-radius: 35px;
+            margin-right: 50px;
             margin-top: 12%;
         }
     </style>
@@ -279,7 +294,7 @@
             <div3 class="flex-container">
                 <div>
                     <button class="button button1" onclick="location.href = '../findtime/'">Find Homie Time</button>
-                    <p>Use this to find a time that works between you and your homie</p>
+                    <p>Use this to set time for your homies!</p>
                 </div>
 
                 <div>
@@ -289,7 +304,7 @@
 
                 <div>
                     <button class="button button1" onclick="location.href = '../homielist/'">View Your Homies</button>
-                    <p>short description of the tab</p>
+                    <p>Use this to manage your friend list!</p>
                 </div>
             </div3>
             <div class="side">
@@ -317,7 +332,7 @@
 
                 
                 <div5>
-                    <button style="align-self: flex-end" class="button button1 viewBtn" onclick="location.href = '../view/'">View Your Calendar</button>
+                    <button style="align-self: flex-end" class="button1 viewBtn" onclick="location.href = '../view/'">View Your Calendar</button>
                 </div5>
             </div>
         </div4>
