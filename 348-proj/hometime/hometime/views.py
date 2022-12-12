@@ -34,14 +34,7 @@ def profile(request):
 
     username = request.session["username"]
     user = User.objects.get(username=username)
-
     context = {}
-    context["firstname"] = user.firstname
-    context["lastname"] = user.lastname
-    context["email"] = user.email
-    context["username"] = user.username
-    context["bio"] = user.bio
-    context['custom_image'] = user.profile_pic
 
     if 'name' in request.GET:
         myname = request.GET['name']
@@ -55,18 +48,18 @@ def profile(request):
         else:
             user.firstname = ""
             user.lastname = ""
-        user.save()
     if 'email' in request.GET:
         user.email = request.GET['email']
-        user.save()
     if 'bio' in request.GET:
         user.bio = request.GET['bio']
-        user.save()
+    user.save()
 
-    
-
-
-    
+    context["firstname"] = user.firstname
+    context["lastname"] = user.lastname
+    context["email"] = user.email
+    context["username"] = user.username
+    context["bio"] = user.bio
+    context['custom_image'] = user.profile_pic
 
     return render(request, 'profile.html', context)
 
@@ -315,6 +308,7 @@ def findtime(request):
     context['friends'] = friends
     events = seeEventsList(username)
     context['events'] = events
+    context['custom_image'] = user_obj.profile_pic
     
     if request.method == "POST":
         friendUsername = request.POST.get('selectFriend')
