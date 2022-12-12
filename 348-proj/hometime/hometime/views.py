@@ -97,8 +97,6 @@ def editEvent(request, event_id):
     if request.method == "POST":
             name = request.POST.get("name")
             start_time = request.POST.get("start_time")
-            if Event.objects.filter(name=name, start_time=start_time).exists():
-                return HttpResponse("Sorry event like this already exists!")
             with transaction.atomic():  
                 event = Event.objects.get(event_id=uuid.UUID(event_id))
                 event.name = name
@@ -110,6 +108,17 @@ def editEvent(request, event_id):
                 event.save()
                 return HttpResponseRedirect("../view/")
     return render(request, 'editEvent.html', context)
+
+@transaction.atomic
+def deleteEvent(request, event_id):
+    try:
+        with transaction.atomic():  
+            event = Event.objects.get(event_id=uuid.UUID(event_id))
+            event.delete()
+    except Event.DoesNotExist:
+        return HttpResponse("Event has been deleted!")
+    return render(request, 'viewcal.html')
+
     
 @transaction.atomic
 def createEvent(request):
