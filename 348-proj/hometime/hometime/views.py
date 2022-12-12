@@ -32,11 +32,6 @@ def login(request):
                 return HttpResponse("Error, in log in! Check if username and password\nis correct or if you have an account with us :)")
     return render(request, 'login.html')
 
-def newprofilepage(request):
-
-    return render(request, "newprofilepage.html")
-
-
 def profile(request):
 
     username = request.session["username"]
@@ -288,9 +283,14 @@ def homielist(request):
             context2['username'] = friend.username
             context2['custom_image'] = friend.profile_pic
             return render(request, 'viewHomie.html', context2)
+        elif "deleteHomie" in request.POST:
+            chosen = request.POST["deleteHomie"]
+            test_obj = Friend.objects.filter(friendedBy=username, friendUserName=chosen)
+            test_obj.delete()
+
+
 
     myfriend = getfriendObjects(username=username)
-    test_obj = Friend.objects.filter(friendedBy="george", friendUserName="JBond")
 
     #Example of how you can access friend information
     context['friends'] = myfriend
