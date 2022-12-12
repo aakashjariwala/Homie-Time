@@ -4,6 +4,7 @@ from django.http import *
 from django.db import transaction
 from .forms import *
 import uuid
+import hashlib
 
 
 def index(request):
@@ -23,7 +24,8 @@ def login(request):
             valid = False
             return HttpResponse("Error, in log in! Check if username and password\nis correct or if you have an account with us :)")
         if valid:
-            if user_obj.passwordHash == request.POST.get('PasswordHash'):
+            temp = hashlib.sha1(request.POST.get('PasswordHash').encode('utf-8')).hexdigest()
+            if user_obj.passwordHash == temp:
                 request.session["username"] = username
                 return HttpResponseRedirect("../home")     
             else:
@@ -68,7 +70,7 @@ def createAccount(request):
         if request.POST.get("password") == request.POST.get("password-re"):
             with transaction.atomic():
                 user = User.objects.create()
-                user.passwordHash = request.POST.get("password")
+                user.passwordHash = hashlib.sha1(request.POST.get("password").encode('utf-8')).hexdigest()
                 user.firstname = request.POST.get("firstname")
                 user.lastname = request.POST.get("lastname")
                 user.email = request.POST.get("email")
@@ -274,6 +276,7 @@ def homielist(request):
             return render(request, 'viewHomie.html', context2)
 
     myfriend = getfriendObjects(username=username)
+    test_obj = Friend.objects.filter(friendedBy="george", friendUserName="JBond")
 
     #Example of how you can access friend information
     context['friends'] = myfriend

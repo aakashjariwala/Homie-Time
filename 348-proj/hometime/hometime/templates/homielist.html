@@ -132,9 +132,15 @@
             <form method="POST">
                 {% csrf_token %}
                 <input type="text" name="friend" class="w-40 mt-5 border border-textcolor" placeholder="Friend username">
-                <button class="search w-40 h-10 mt-20 rounded-full bg-startcolor justify-center">Search</button>
+                <button onclick="confirmation()" class="search w-40 h-10 mt-20 rounded-full bg-startcolor justify-center">Add Friend</button>
             </form>
         </div>
     </div>
 </body>
+<Script>
+    function confirmation() {
+        alert("You're request was processed!");
+    }
+</Script>
+
 </html>
