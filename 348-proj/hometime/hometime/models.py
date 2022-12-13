@@ -9,8 +9,12 @@ class User(models.Model):
     passwordHash = models.CharField(max_length=25)
     email = models.CharField(max_length=50)
     bio = models.CharField(max_length=300)
-
     profile_pic = models.ImageField(null=True, blank=True, upload_to="img/%y")
+    
+    class Meta:
+       indexes = [
+           models.Index(fields=['username',]),
+    ]
 
     #friends = models.ManyToManyField("User", blank=True)
     def __str__(self):
@@ -20,6 +24,10 @@ class Friend(models.Model):
     friendedBy = models.CharField(max_length=50)
     friendUserName = models.CharField(max_length=50)
     friend = models.ForeignKey(User, on_delete=models.CASCADE, related_name='myfriends')
+    class Meta:
+       indexes = [
+           models.Index(fields=['friendUserName',]),
+    ]
     def __str__(self):
         return self.friendUserName
 
@@ -35,7 +43,8 @@ class Event(models.Model):
     notes = models.CharField(max_length=300)
     class Meta:
        indexes = [
-           models.Index(fields=['-day',]),
+           models.Index(fields=['event_id',]),
+           models.Index(fields=['day',]),
     ]
 
     def __str__(self):

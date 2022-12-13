@@ -181,11 +181,6 @@ def editprofileimage(request):
             return HttpResponse("Something went wrong with upload")
     
     context['custom_image'] = user.profile_pic
-
-
-    
-
-
     return render(request, 'editprofileimage.html', context)
 
 def home(request):
