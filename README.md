@@ -1,25 +1,23 @@
-CS 348 Project
+# Homie-Time
 
-### Details to Run Application
+A full-stack, realtime scheduling and coordination platform that enables users to collaborate, track tasks, and manage shared time commitments. This project illustrates capabilities in UI design, backend APIs, and real-time communication.
 
+## 🚀 Tech Stack
 
-1. To run the progrm in a mac use the following command:
+- **Languages:** JavaScript, HTML, CSS  
+- **Frontend:** React, Tailwind
+- **Backend:** Node.js, Express.js
+- **Realtime / Communication:** WebSockets
+- **Tooling & Config:** Prettier, Git
 
-  - Python3 manage.py runserver
-  
-2. Run tailwind we use the following command:
+## 🌟 Key Features
 
-  - Python3 manage.py tailwind start
-  
-  
-3. If there are errors with tailwind use the following command:
+- Real-time updates and synchronization of scheduling or tasks  
+- User authentication and role management
+- CRUD operations for tasks, events, and time slots  
+- Clear modular separation of frontend and backend
+- Containerized setup suited for scalable deployment  
 
+## 📌 Highlights
 
- - Python3 manage.py tailwind install
- 
-4. If you need assistance with setting up the Django Enviornment, use the following link to set up the enviornment:
-
- - https://drive.google.com/file/d/1j_KG2hBQbDXJWpAhL84i7bbzfv16cgJR/view?usp=sharing
-
-
-
+This project demonstrates proficiency in building reactive, real-time web applications with a strong grasp of client-server synchronization.
