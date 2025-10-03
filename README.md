@@ -6,7 +6,7 @@
 
 A full-stack, realtime scheduling and coordination platform that enables users to collaborate, track tasks, and manage shared time commitments. This project illustrates capabilities in UI design, backend APIs, and real-time communication.
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - **Languages:** JavaScript, HTML, CSS  
 - **Frontend:** React, Tailwind
@@ -14,7 +14,7 @@ A full-stack, realtime scheduling and coordination platform that enables users t
 - **Realtime / Communication:** WebSockets
 - **Tooling & Config:** Prettier, Git
 
-## 🌟 Key Features
+## Key Features
 
 - Real-time updates and synchronization of scheduling or tasks  
 - User authentication and role management
@@ -22,6 +22,6 @@ A full-stack, realtime scheduling and coordination platform that enables users t
 - Clear modular separation of frontend and backend
 - Containerized setup suited for scalable deployment  
 
-## 📌 Highlights
+## Highlights
 
 This project demonstrates proficiency in building reactive, real-time web applications with a strong grasp of client-server synchronization.
