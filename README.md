@@ -10,7 +10,7 @@ A full-stack, realtime scheduling and coordination platform that enables users t
 
 - **Languages:** JavaScript, HTML, CSS  
 - **Frontend:** React, Tailwind
-- **Backend:** Node.js, Express.js
+- **Backend:** Node.js, Express.js, Django
 - **Realtime / Communication:** WebSockets
 - **Tooling & Config:** Prettier, Git
 
