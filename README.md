@@ -1,4 +1,8 @@
-# Homie-Time
+<p align="center">
+  <img src="348-proj/hometime/theme/static/icons/logo.png" alt="CampusCircle Logo" width="300"/>
+</p>
+
+# Homie Time
 
 A full-stack, realtime scheduling and coordination platform that enables users to collaborate, track tasks, and manage shared time commitments. This project illustrates capabilities in UI design, backend APIs, and real-time communication.
 
